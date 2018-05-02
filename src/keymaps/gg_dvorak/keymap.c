@@ -1,4 +1,4 @@
-/* jedit settings  :elasticTabstops=true: */
+﻿/* jedit settings  :elasticTabstops=true:encoding=UTF-8: */
 
 #include QMK_KEYBOARD_H
 #include "debug.h"
@@ -10,13 +10,15 @@
 
 /*
   Author: Graeme Geldenhuys <graeme@geldenhuys.co.uk>
-  Ver 1.18
+
   Based on the default Dvorak keymap, and applied some
   tweaks from the TypeMatrix 2030 design. Some key locations are also
   designed to work well with my programming environment (FPC +Lazarus).
   
   Compile with;   gmake ergodox_ez:gg_dvorak:teensy
 */
+
+#define GG_VERSION "1.19"
 
 #define CUT      LCTL(KC_X)	// C-x Cut
 #define COPY     LCTL(KC_C)	// C-c Copy
@@ -83,7 +85,7 @@ static uint16_t m_copypaste_timer;
 */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT_ergodox(
-/* Keymap 0: Basic layer                                                  Version: 1.18
+/* Keymap 0: Basic layer                                                  Version: 1.xx
  *
  * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
  * │  Esc   │  F1  │  F2  │  F3  │  F4  │  F5  │  F11 │           │  F12 │  F6  │  F7  │  F8  │  F9  │  F10 │   \   |│
@@ -99,9 +101,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        ╭──────┬──────╮       ╭──────┬──────╮
  *                                        │ INS  │ CAPS │       │ GUI  │ QWER │
  *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮      Hyper = Meh+Gui
- *                                 │ TAB  │      │ App  │       │ PgUp │      │ Space│        Meh = Control+Alt+Shift
- *                                 │  /   │ BkSp ├──────┤       ├──────┤ Enter│   /  │        GUI = Super or Win key
- *                                 │ Ctrl │      │ PScr │       │ Del  │      │ ~SYMB│        App = Menu key
+ *                                 │      │ TAB  │ App  │       │ PgUp │      │ BkSp │        Meh = Control+Alt+Shift
+ *                                 │ Space│  /   ├──────┤       ├──────┤ Enter│   /  │        GUI = Super or Win key
+ *                                 │      │ Ctrl │ PScr │       │ Del  │      │ ~SYMB│        App = Menu key
  *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
  */
 	// left hand
@@ -113,7 +115,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	KC_INS,	KC_CAPS,
 	KC_APP,	
-	CTL_T(KC_TAB),	KC_BSPC,	KC_PSCR,
+	KC_SPC,	CTL_T(KC_TAB),	KC_PSCR,
 
 	// right hand
 	KC_F12,	KC_F6,	KC_F7,	KC_F8,	KC_F9,	KC_F10,	KC_BSLS,
@@ -124,7 +126,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	KC_LGUI,	TG(QWER),
 	KC_PGUP,
-	KC_DELT,	KC_ENT,	LT(SYMB,KC_SPC)
+	KC_DELT,	KC_ENT,	LT(SYMB,KC_BSPC)
 ),
 
 [SYMB] = LAYOUT_ergodox(
@@ -178,17 +180,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
  * │        │      │      │      │      │      │      │           │      │      │ Home │  ▲   │  End │      │        │
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
- * │        │      │      │      │      │      ├──────┤           ├──────┤      │•  ◀  │  ▼   │   ▶  │      │        │
+ * │        │      │      │      │     •│      ├──────┤           ├──────┤ PgUp │•  ◀  │  ▼   │   ▶  │      │        │
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
- * │        │      │      │      │      │      │      │           │      │      │ PgUp │      │ PgDn │      │        │
+ * │        │      │      │      │      │      │      │           │      │ PgDn │      │      │      │      │        │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
  *   │      │      │      │      │      │                                       │      │      │      │      │ SLCK │
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
  *                                        ╭──────┬──────╮       ╭──────┬────────╮                                   
  *                                        │      │      │       │      │        │             *** left hand ***     
  *                                 ╭──────┼──────┼──────┤       ├──────┼────────┼──────╮        ESC = Reset         
- *                                 │      │      │      │       │      │        │      │       PScr = Version       
- *                                 │      │      ├──────┤       ├──────┤        │      │                            
+ *                                 │      │      │      │       │      │ Shift+ │      │       PScr = Version       
+ *                                 │      │      ├──────┤       ├──────┤  Ctrl  │ Ctrl │                            
  *                                 │      │      │  VER │       │      │        │      │
  *                                 ╰──────┴──────┴──────╯       ╰──────┴────────┴──────╯
  */
@@ -205,12 +207,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	// right hand
 	__x___,	__x___,	__x___,	__x___,	__x___,	__x___,	__x___,
 	______,	__x___,	KC_HOME,	KC_UP,	KC_END,	__x___,	__x___,
-		__x___,	KC_LEFT,	KC_DOWN,	KC_RIGHT,	__x___,	__x___,
-	______,	__x___,	KC_PGUP,	__x___,	KC_PGDN,	__x___,	__x___,
+		KC_PGUP,	KC_LEFT,	KC_DOWN,	KC_RIGHT,	__x___,	__x___,
+	______,	KC_PGDN,	__x___,	__x___,	__x___,	__x___,	__x___,
 			__x___,	__x___,	__x___,	__x___,	KC_SLCK,
 	______,	______,
 	______,
-	______,	______,	______
+	______,	LCTL(KC_LSHIFT),	KC_LCTRL
 ),
 
 [QWER] = LAYOUT_ergodox(
@@ -419,7 +421,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 			break;
 		case VRSN:
 			if (record->event.pressed) {
-				SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION);
+				SEND_STRING (QMK_KEYBOARD "/" QMK_KEYMAP " @ " QMK_VERSION " (" GG_VERSION ")");
 			}
 			break;
 		case POUND:  // POUND = UC(0x00A3)
