@@ -18,7 +18,7 @@
   Compile with;   gmake ergodox_ez:gg_dvorak:teensy
 */
 
-#define GG_VERSION "1.19"
+#define GG_VERSION "1.20"
 
 #define CUT      LCTL(KC_X)	// C-x Cut
 #define COPY     LCTL(KC_C)	// C-c Copy
@@ -90,7 +90,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
  * │  Esc   │  F1  │  F2  │  F3  │  F4  │  F5  │  F11 │           │  F12 │  F6  │  F7  │  F8  │  F9  │  F10 │   \   |│
  * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
- * │  Tab   │  '  "│  ,  <│  .  >│  P   │   Y  │ Hyper│           │ Hyper│   F  │   G  │  C   │  R   │  L   │   /   ?│
+ * │  Tab   │  '  "│  ,  <│  .  >│  P   │   Y  │ Hyper│           │ BkSp │   F  │   G  │  C   │  R   │  L   │   /   ?│
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
  * │ Shift  │  A   │  O   │  E   │  U •²│   I  ├──────┤           ├──────┤   D  │ • H  │  T   │  N   │  S   │   ─   _│
  * ├────────┼──────┼──────┼──────┼──────┼──────┤  :=  │           │  Meh ├──────┼──────┼──────┼──────┼──────┼────────┤
@@ -101,9 +101,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        ╭──────┬──────╮       ╭──────┬──────╮
  *                                        │ INS  │ CAPS │       │ GUI  │ QWER │
  *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮      Hyper = Meh+Gui
- *                                 │      │ TAB  │ App  │       │ PgUp │      │ BkSp │        Meh = Control+Alt+Shift
- *                                 │ Space│  /   ├──────┤       ├──────┤ Enter│   /  │        GUI = Super or Win key
- *                                 │      │ Ctrl │ PScr │       │ Del  │      │ ~SYMB│        App = Menu key
+ *                                 │ Space│      │ App  │       │ PgUp │      │ BkSp │        Meh = Control+Alt+Shift
+ *                                 │  /   │ Enter├──────┤       ├──────┤  Tab │   /  │        GUI = Super or Win key
+ *                                 │ Ctrl │      │ PScr │       │ Del  │      │ ~SYMB│        App = Menu key
  *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
  */
 	// left hand
@@ -115,18 +115,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	KC_INS,	KC_CAPS,
 	KC_APP,	
-	KC_SPC,	CTL_T(KC_TAB),	KC_PSCR,
+	CTL_T(KC_SPC),	KC_ENT,	KC_PSCR,
 
 	// right hand
 	KC_F12,	KC_F6,	KC_F7,	KC_F8,	KC_F9,	KC_F10,	KC_BSLS,
-	ALL_T(KC_NO),	KC_F,	KC_G,	KC_C,	KC_R,	KC_L,	KC_SLSH,
+	KC_BSPC,	KC_F,	KC_G,	KC_C,	KC_R,	KC_L,	KC_SLSH,
 		KC_D,	KC_H,	KC_T,	KC_N,	KC_S,	KC_MINS,
 	MEH_T(KC_NO),	KC_B,	KC_M,	KC_W,	KC_V,	KC_Z,	KC_RSFT,
 			KC_LEFT,	KC_UP,	KC_DOWN,	KC_RIGHT,	KC_RCTRL,
 
 	KC_LGUI,	TG(QWER),
 	KC_PGUP,
-	KC_DELT,	KC_ENT,	LT(SYMB,KC_BSPC)
+	KC_DELT,	KC_TAB,	LT(SYMB,KC_BSPC)
 ),
 
 [SYMB] = LAYOUT_ergodox(
