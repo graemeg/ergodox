@@ -13,9 +13,12 @@
 
   Based on the default Dvorak keymap, and applied some
   tweaks from the TypeMatrix 2030 design. Some key locations are also
-  designed to work well with my programming environment (FPC +Lazarus).
+  designed to work well with my programming environment (FPC/Lazarus/Delphi).
   
-  Compile with;   gmake ergodox_ez:gg_dvorak:teensy
+  Compile with:
+    ./build.sh
+       or
+    gmake ergodox_ez:gg_dvorak:teensy
 */
 
 #define GG_VERSION "1.20"
@@ -79,7 +82,7 @@ static uint16_t m_copypaste_timer;
 	MEH_T(...) = Meh
 
 	For layer switching options and explanation, see the following page:
-	   https://docs.qmk.fm/feature_common_shortcuts.html#switching-and-toggling-layer
+	   https://docs.qmk.fm/features/advanced-keycodes#switching-and-toggling-layers
 
 	I also have Space-Cadet Shift keys enabled and disabled command mode via the Makefile.
 */
