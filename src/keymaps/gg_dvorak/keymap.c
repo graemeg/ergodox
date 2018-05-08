@@ -21,7 +21,7 @@
     gmake ergodox_ez:gg_dvorak:teensy
 */
 
-#define GG_VERSION "1.22"
+#define GG_VERSION "1.23"
 
 #define CUT      LCTL(KC_X)	// C-x Cut
 #define COPY     LCTL(KC_C)	// C-c Copy
@@ -37,7 +37,8 @@ enum {
 	AROWS,	// arrows, PgUp, PgDn, Home, End
 	QWER,	// QWERTY
 	MOUSE,	// Mouse navigation
-	SYMB2	// new symbol layer based on dan-workman layout
+	SYMB2,	// new symbol layer based on dan-workman layout
+	BEAKL
 };
 
 /* Macros (aka Actions) */
@@ -96,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * │  Tab   │  '  "│  ,  <│  .  >│  P   │   Y  │ Hyper│           │ BkSp │   F  │   G  │  C   │  R   │  L   │   /   ?│
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
  * │ Shift  │  A   │  O   │  E   │  U •²│   I  ├──────┤           ├──────┤   D  │ • H  │  T   │  N   │  S   │   ─   _│
- * ├────────┼──────┼──────┼──────┼──────┼──────┤  :=  │           │  Meh ├──────┼──────┼──────┼──────┼──────┼────────┤
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤  :=  │           │ Enter├──────┼──────┼──────┼──────┼──────┼────────┤
  * │ Shift  │  ;  :│   Q  │   J  │  K   │   X  │      │           │      │   B  │   M  │  W   │  V   │  Z   │  Shift │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
  *   │LCtrl │ LAlt │ MOUSE│CP/CUT│ PASTE│                                       │  ◀   │   ▲  │   ▼  │  ▶   │ RCtrl│
@@ -104,7 +105,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        ╭──────┬──────╮       ╭──────┬──────╮
  *                                        │ INS  │ CAPS │       │ GUI  │ QWER │
  *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮      Hyper = Meh+Gui
- *                                 │ Space│ Enter│ App  │       │ PgUp │ Enter│ Space│        Meh = Control+Alt+Shift
+ *                                 │ Space│ Enter│ App  │       │ Beakl│ Enter│ Space│        Meh = Control+Alt+Shift
  *                                 │  /   │  /   ├──────┤       ├──────┤   /  │   /  │        GUI = Super or Win key
  *                                 │ Ctrl │ Alt  │ PScr │       │ Del  │ ~Sym2│ ~Sym1│        App = Menu key
  *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
@@ -125,10 +126,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_BSPC,	KC_F,	KC_G,	KC_C,	KC_R,	KC_L,	KC_SLSH,
 		KC_D,	KC_H,	KC_T,	KC_N,	KC_S,	KC_MINS,
 	KC_ENT,	KC_B,	KC_M,	KC_W,	KC_V,	KC_Z,	KC_RSFT,
-			KC_LEFT,	KC_UP,	KC_DOWN,	KC_RIGHT,	KC_RCTRL,
+			LT(SYMB2,KC_LEFT),	KC_UP,	KC_DOWN,	KC_RIGHT,	KC_RCTRL,
 
 	KC_LGUI,	TG(QWER),
-	KC_PGUP,
+	TG(BEAKL),
 	KC_DELT,	LT(SYMB2,KC_ENT),	LT(SYMB,KC_SPC)
 ),
 
@@ -347,6 +348,49 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	______,
 	______,	______,	______
 
+),
+[BEAKL] = KEYMAP(
+/* BEAKL-9 [http://www.shenafu.com/code/keyboard/beakl/index.php]
+ *
+ * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
+ * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
+ * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
+ * │        │      │      │      │     •│      ├──────┤           ├──────┤      │•     │      │      │      │        │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
+ * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
+ * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
+ *   │      │      │      │      │      │                                       │      │      │      │      │      │
+ *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
+ *                                        ╭──────┬──────╮       ╭──────┬────────╮
+ *                                        │      │      │       │      │        │
+ *                                 ╭──────┼──────┼──────┤       ├──────┼────────┼──────╮
+ *                                 │      │      │      │       │      │        │      │
+ *                                 │      │      ├──────┤       ├──────┤        │      │
+ *                                 │      │      │      │       │      │        │      │
+ *                                 ╰──────┴──────┴──────╯       ╰──────┴────────┴──────╯
+ */
+	// left hand
+	______,	______,	______,	______,	______,	______,	______,
+	______,	KC_J,	KC_H,	KC_O,	KC_U,	KC_K,	______,
+	KC_MINUS,	KC_Q,	KC_I,	KC_E,	KC_A,	KC_Y,
+	______,	KC_SLASH,	KC_COMM,	KC_QUOTE,	KC_DOT,	KC_X,	______,
+	______,	______,	______,	______,	______,
+	______,	______,
+	______,
+	______,	______,	______,
+
+	// right hand
+	______,	______,	______,	______,	______,	______,	______,
+	______,	KC_G,	KC_C,	KC_R,	KC_F,	KC_Z,	______,
+		KC_D,	KC_S,	KC_T,	KC_N,	KC_B,	KC_SCLN,
+	______,	KC_W,	KC_M,	KC_L,	KC_P,	KC_V,	______,
+			______,	______,	______,	______,	______,
+	______,	______,
+	______,
+	______,	______,	______
+
 )
 };
 
@@ -390,8 +434,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	______,	______,
 	______,
 	______,	______,	______
- */
 
+*/
 
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
