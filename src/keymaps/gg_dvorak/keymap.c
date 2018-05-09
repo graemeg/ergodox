@@ -102,10 +102,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        ╭──────┬──────╮       ╭──────┬──────╮
  *                                        │ INS  │ CAPS │       │ GUI  │ QWER │
  *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮      Hyper = Meh+Gui
- *                                 │ Space│ Enter│ App  │       │ Beakl│ Enter│ Space│        Meh = Control+Alt+Shift
- *                                 │  /   │  /   ├──────┤       ├──────┤   /  │   /  │        GUI = Super or Win key
- *                                 │ Ctrl │ Alt  │ PScr │       │ Del  │ ~Sym2│ ~Sym1│        App = Menu key
- *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
+ *                                 │ Space│ Enter│ App  │       │ Beakl│      │  OSL │        Meh = Control+Alt+Shift
+ *                                 │  /   │  /   ├──────┤       ├──────┤ Sym2 │      │        GUI = Super or Win key
+ *                                 │ Ctrl │ Alt  │ PScr │       │ Del  │      │  Sym1│        App = Menu key
+ *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯        OSL = One-Shot Layer
  */
 	// left hand
 	KC_ESC,	KC_F1,	KC_F2,	KC_F3,	KC_F4,	KC_F5,	KC_F11,
@@ -127,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	KC_LGUI,	TG(QWER),
 	TG(BEAKL),
-	KC_DELT,	LT(SYMB2,KC_ENT),	LT(SYMB,KC_SPC)
+	KC_DELT,	TG(SYMB2),	OSL(SYMB)
 ),
 [BEAKL] = KEYMAP(
 /* BEAKL-9 [http://www.shenafu.com/code/keyboard/beakl/index.php]
