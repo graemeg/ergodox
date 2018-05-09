@@ -3,8 +3,6 @@
 #include QMK_KEYBOARD_H
 #include "debug.h"
 #include "action_layer.h"
-/* #include "keymap_extras/keymap_uk.h" */
-#include "process_unicode.h"
 #include "version.h"
 #include "timer.h"
 
