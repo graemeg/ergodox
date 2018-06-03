@@ -19,7 +19,7 @@
     gmake ergodox_ez:gg_dvorak:teensy
 */
 
-#define GG_VERSION "1.24"
+#define GG_VERSION "1.25"
 
 #define CUT      LCTL(KC_X)	// C-x Cut
 #define COPY     LCTL(KC_C)	// C-c Copy
@@ -102,9 +102,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        ╭──────┬──────╮       ╭──────┬──────╮
  *                                        │ INS  │ CAPS │       │ GUI  │ QWER │
  *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮      Hyper = Meh+Gui
- *                                 │ Space│ Enter│ App  │       │ Beakl│      │  OSL │        Meh = Control+Alt+Shift
- *                                 │  /   │  /   ├──────┤       ├──────┤ Sym2 │      │        GUI = Super or Win key
- *                                 │ Ctrl │ Alt  │ PScr │       │ Del  │      │  Sym1│        App = Menu key
+ *                                 │ Space│ Enter│ App  │       │ Beakl│      │ BkSp │        Meh = Control+Alt+Shift
+ *                                 │  /   │  /   ├──────┤       ├──────┤ TAB  │  /   │        GUI = Super or Win key
+ *                                 │ Ctrl │ Alt  │ PScr │       │ Del  │      │ Sym  │        App = Menu key
  *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯        OSL = One-Shot Layer
  */
 	// left hand
@@ -112,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_TAB,	KC_QUOT,	KC_COMM,	KC_DOT,	KC_P,	KC_Y,	ALL_T(KC_NO),
 	KC_LSFT,	KC_A,	KC_O,	KC_E,	LT(AROWS,KC_U),	KC_I,
 	KC_LSFT,	KC_SCLN,	KC_Q,	KC_J,	KC_K,	KC_X,	M(MACRO_ISEQUALS),
-	KC_LCTRL,	KC_LALT,	M(COMPI),	M(A_COPYCUT),	PASTE,
+	KC_LCTRL,	KC_LALT,	CTL_T(KC_F9),	M(A_COPYCUT),	PASTE,
 
 	KC_INS,	KC_CAPS,
 	KC_APP,	
@@ -127,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	KC_LGUI,	TG(QWER),
 	TG(BEAKL),
-	KC_DELT,	TG(SYMB2),	OSL(SYMB)
+	KC_DELT,	KC_TAB,	LT(SYMB,KC_BSPC)
 ),
 [BEAKL] = KEYMAP(
 /* BEAKL-9 [http://www.shenafu.com/code/keyboard/beakl/index.php]
@@ -302,16 +302,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	______,	______,	______
 ),
 [SYMB2] = KEYMAP(
-/* Symbols 2 - based on Workman layout
+/* Symbols 2
  *
  * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
  * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
  * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
- * │        │  F1  │  F2  │  F3  │  F4  │  F5  │      │           │      │  F6  │  F7  │  F8  │  F9  │ F10  │  F11   │
+ * │        │  !   │  @   │  #   │  $   │  %   │      │           │      │  ^   │  &   │  *   │  -   │  =   │        │
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
- * │        │  1  !│  2  @│  3  #│  4 $•│  5  %├──────┤           ├──────┤  6  ^│• 7  &│  8  *│  9  (│  0  )│  F12   │
+ * │        │  1   │  2   │  3   │  4  •│  5   ├──────┤           ├──────┤  6   │• 7   │  8   │  9   │  0   │        │
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
- * │        │  `  ~│  =  +│  -  _│  [  {│  ]  }│      │           │      │  '  "│  ;  :│  ,  <│  .  >│  /  ?│   \  | │
+ * │        │  |   │  \   │  (   │  {   │  [   │      │           │      │  ]   │  }   │  )   │  _   │  +   │        │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
  *   │      │      │      │      │      │                                       │      │      │      │      │      │
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
@@ -324,25 +324,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
  */
 	// left hand
-	______,	______,	______,	______,	______,	______,	______,
-	______,	KC_F1,	KC_F2,	KC_F3,	KC_F4,	KC_F5,	______,
-	______,	SFT_T(KC_1),	CTL_T(KC_2),	ALT_T(KC_3),	KC_4,	KC_5,
-	______,	KC_GRV,	KC_EQL,	KC_MINUS,	KC_LBRC,	KC_RBRC,	KC_TILD,
+	KC_TILD,	______,	______,	______,	______,	______,	______,
+	KC_GRAVE,	KC_EXLM,	KC_AT,	KC_HASH,	KC_DLR,	KC_PERC,	______,
+	______,	KC_1,	KC_2,	KC_3,	KC_4,	KC_5,
+	______,	KC_PIPE,	KC_BSLASH,	KC_LPRN,	KC_LCBR,	KC_LBRACKET,	______,
 	______,	______,	______,	______,	______,
+
 	______,	______,
 	______,
 	______,	______,	______,
 
 	// right hand
 	______,	______,	______,	______,	______,	______,	______,
-	______,	KC_F6,	KC_F7,	KC_F8,	KC_F9,	KC_F10,	KC_F11,
-		KC_6,	KC_7,	ALT_T(KC_8),	CTL_T(KC_9),	SFT_T(KC_0),	KC_F12,
-	______,	KC_QUOTE,	KC_SCLN,	KC_COMM,	KC_DOT,	KC_SLASH,	KC_BSLASH,
-			______,	______,	______,	______,	______,
+	______,	KC_CIRC,	KC_AMPR,	KC_ASTR,	KC_MINUS,	KC_EQUAL,	______,
+		KC_6,	KC_7,	KC_8,	KC_9,	KC_0,	______,
+	______,	KC_RBRACKET,	KC_RCBR,	KC_RPRN,	KC_UNDS,	KC_PLUS,	______,
+	______,	______,	______,	______,	______,
+
 	______,	______,
 	______,
 	______,	______,	______
-
 )
 };
 
