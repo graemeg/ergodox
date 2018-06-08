@@ -195,7 +195,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
  */
 	// left hand
-	______,	______,	______,	M(POUND),	M(EURO),	______,	______,
+	______,	______,	______,	UC(0x00ac),	UC(0x20ac),	______,	______,
 	______,	KC_EXLM,	KC_AT,	KC_LCBR,	KC_RCBR,	KC_PLUS,	M(MACRO_TODO),
 	______,	KC_PERC,	KC_DLR,	KC_LPRN,	KC_RPRN,	KC_EQL,
 	______,	KC_AMPR,	KC_CIRC,	KC_LBRC,	KC_RBRC,	KC_TILD,	M(MACRO_PARENTHESE),
@@ -457,7 +457,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
 	
-	set_unicode_input_mode(UC_BSD);
+//	set_unicode_input_mode(UC_BSD);
 /*
 	ergodox_led_all_on();
 	for (int i = LED_BRIGHTNESS_HI; i > LED_BRIGHTNESS_LO; i--) {
