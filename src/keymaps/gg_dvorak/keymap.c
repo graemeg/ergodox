@@ -19,7 +19,7 @@
     gmake ergodox_ez:gg_dvorak:teensy
 */
 
-#define GG_VERSION "1.25"
+#define GG_VERSION "1.26"
 
 #define CUT      LCTL(KC_X)	// C-x Cut
 #define COPY     LCTL(KC_C)	// C-c Copy
@@ -35,7 +35,8 @@ enum {
 	SYMB,	// symbols + NumPad
 	AROWS,	// arrows, PgUp, PgDn, Home, End
 	QWER,	// QWERTY
-	SYMB2	// new symbol layer based on Dan's Workman layout
+	SYMB2,	// new symbol layer based on Dan's Workman layout
+	MOUSE	// Mouse navigation and Media buttons
 };
 
 /* Macros (aka Actions) */
@@ -80,7 +81,7 @@ static uint16_t m_copypaste_timer;
 	MEH_T(...) = Meh
 
 	For layer switching options and explanation, see the following page:
-	   https://docs.qmk.fm/features/advanced-keycodes#switching-and-toggling-layers
+	   https://docs.qmk.fm/#/feature_advanced_keycodes
 
 	I also have Space-Cadet Shift keys enabled and disabled command mode via the Makefile.
 */
@@ -97,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├────────┼──────┼──────┼──────┼──────┼──────┤  :=  │           │ Enter├──────┼──────┼──────┼──────┼──────┼────────┤
  * │ Shift  │  ;  :│  Q   │  J   │  K   │   X  │      │           │      │   B  │   M  │  W   │  V   │  Z   │  Shift │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
- *   │LCtrl │ LAlt │ C+F9 │CP/CUT│ PASTE│                                       │  ◀   │   ▲  │   ▼  │  ▶   │ RCtrl│
+ *   │LCtrl │ LAlt │CP/CUT│ PASTE│ MOUSE│                                       │  ◀   │   ▲  │   ▼  │  ▶   │ RCtrl│
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
  *                                        ╭──────┬──────╮       ╭──────┬──────╮
  *                                        │ INS  │ CAPS │       │ GUI  │ QWER │
@@ -112,7 +113,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_TAB,	KC_QUOT,	KC_COMM,	KC_DOT,	KC_P,	KC_Y,	ALL_T(KC_NO),
 	KC_LSFT,	KC_A,	KC_O,	KC_E,	LT(AROWS,KC_U),	KC_I,
 	KC_LSFT,	KC_SCLN,	KC_Q,	KC_J,	KC_K,	KC_X,	M(MACRO_ISEQUALS),
-	KC_LCTRL,	KC_LALT,	CTL_T(KC_F9),	M(A_COPYCUT),	PASTE,
+	KC_LCTRL,	KC_LALT,	M(A_COPYCUT),	PASTE,	TT(MOUSE),
 
 	KC_INS,	KC_CAPS,
 	KC_APP,	
@@ -341,6 +342,48 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	______,	KC_RBRACKET,	KC_RCBR,	KC_RPRN,	KC_UNDS,	KC_PLUS,	______,
 	______,	______,	______,	______,	______,
 
+	______,	______,
+	______,
+	______,	______,	______
+),
+[MOUSE] = KEYMAP(
+/* Mouse Navigation and Media buttons
+ *
+ * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
+ * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │ Play   │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
+ * │        │      │      │      │      │ Acc0 │      │           │      │      │      │ MS ▲ │      │      │ Vol Up │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
+ * │        │      │      │ LMB  │ RMB •│ Acc1 ├──────┤           ├──────┤  ▲▲  │• MS◀ │ MS ▼ │ MS▶  │      │ Vol Dwn│
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
+ * │        │      │      │      │      │ Acc2 │      │           │      │  ▼▼  │      │      │      │      │  Mute  │
+ * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
+ *   │      │      │      │      │      │                                       │      │      │      │ Prev │ Next │
+ *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
+ *                                        ╭──────┬──────╮       ╭──────┬────────╮
+ *                                        │      │      │       │      │        │
+ *                                 ╭──────┼──────┼──────┤       ├──────┼────────┼──────╮
+ *                                 │      │      │      │       │      │        │      │
+ *                                 │      │      ├──────┤       ├──────┤        │      │
+ *                                 │      │      │      │       │      │        │      │
+ *                                 ╰──────┴──────┴──────╯       ╰──────┴────────┴──────╯
+ */
+	// left hand
+	______,	__x___,	__x___,	__x___,	__x___,	__x___,	__x___,
+	______,	__x___,	__x___,	__x___,	__x___,	KC_MS_ACCEL0,	__x___,
+	______,	__x___,	__x___,	KC_MS_BTN1,	KC_MS_BTN2,	KC_MS_ACCEL1,
+	______,	__x___,	__x___,	__x___,	__x___,	KC_MS_ACCEL2,	__x___,
+	______,	______,	__x___,	__x___,	______,
+	______,	______,
+	______,
+	______,	______,	______,
+
+	// right hand
+	__x___,	__x___,	__x___,	__x___,	__x___,	__x___,	KC_MEDIA_PLAY_PAUSE,
+	__x___,	__x___,	__x___,	KC_MS_UP,	__x___,	__x___,	KC_AUDIO_VOL_UP,
+		KC_WH_U,	KC_MS_LEFT,	KC_MS_DOWN,	KC_MS_RIGHT,	__x___,	KC_AUDIO_VOL_DOWN,
+	__x___,	KC_WH_D,	__x___,	__x___,	__x___,	__x___,	KC_AUDIO_MUTE,
+			__x___,	__x___,	__x___,	KC_MEDIA_PREV_TRACK,	KC_MEDIA_NEXT_TRACK,
 	______,	______,
 	______,
 	______,	______,	______
