@@ -24,6 +24,8 @@ $MAKECMD $KEYBOARD:$KEYMAP:clean
 $MAKECMD $KEYBOARD:$KEYMAP
 
 # 5. Clean up
-cp -r .build ../.build
-git clean -f -d
+cp .build/*.hex ../
+#cp -r .build ../.build
+git clean -x -f -d
 git checkout -- .
+cd ..
