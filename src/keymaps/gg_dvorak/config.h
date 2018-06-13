@@ -11,4 +11,7 @@
 //#undef TAPPING_TERM
 //#undef IGNORE_MOD_TAP_INTERRUPT
 
+#undef MANUFACTURER
+#define MANUFACTURER    Built by Graeme Geldenhuys
+
 #endif
