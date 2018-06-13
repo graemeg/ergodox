@@ -370,9 +370,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 	// left hand
 	______,	__x___,	__x___,	__x___,	__x___,	__x___,	__x___,
-	______,	__x___,	__x___,	__x___,	__x___,	KC_MS_ACCEL0,	__x___,
-	______,	__x___,	__x___,	KC_MS_BTN1,	KC_MS_BTN2,	KC_MS_ACCEL1,
-	______,	__x___,	__x___,	__x___,	__x___,	KC_MS_ACCEL2,	__x___,
+	______,	__x___,	KC_MS_ACCEL0,	KC_MS_ACCEL1,	KC_MS_ACCEL2,	__x___,	__x___,
+	______,	__x___,	KC_MS_BTN1,	KC_MS_BTN3,	KC_MS_BTN2,	__x___,
+	______,	__x___,	KC_MS_BTN4,	KC_MS_BTN5,	__x___,	__x___,	__x___,
 	______,	______,	__x___,	__x___,	______,
 	______,	______,
 	______,
@@ -380,8 +380,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	// right hand
 	__x___,	__x___,	__x___,	__x___,	__x___,	__x___,	KC_MEDIA_PLAY_PAUSE,
-	__x___,	__x___,	__x___,	KC_MS_UP,	__x___,	__x___,	KC_AUDIO_VOL_UP,
-		KC_WH_U,	KC_MS_LEFT,	KC_MS_DOWN,	KC_MS_RIGHT,	__x___,	KC_AUDIO_VOL_DOWN,
+	__x___,	__x___,	__x___,	KC_MS_UP,	__x___,	KC_WH_U,	KC_AUDIO_VOL_UP,
+		KC_WH_U,	KC_MS_LEFT,	KC_MS_DOWN,	KC_MS_RIGHT,	KC_WH_D,	KC_AUDIO_VOL_DOWN,
 	__x___,	KC_WH_D,	__x___,	__x___,	__x___,	__x___,	KC_AUDIO_MUTE,
 			__x___,	__x___,	__x___,	KC_MEDIA_PREV_TRACK,	KC_MEDIA_NEXT_TRACK,
 	______,	______,
