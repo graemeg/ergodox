@@ -36,7 +36,8 @@ enum {
 	AROWS,	// arrows, PgUp, PgDn, Home, End
 	QWER,	// QWERTY
 	SYMB2,	// new symbol layer based on Dan's Workman layout
-	MOUSE	// Mouse navigation and Media buttons
+	MOUSE,	// Mouse navigation and Media buttons
+	DUALHOME	// Dual-key home row
 };
 
 /* Macros (aka Actions) */
@@ -103,9 +104,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        ╭──────┬──────╮       ╭──────┬──────╮
  *                                        │ INS  │ CAPS │       │ GUI  │ QWER │
  *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮      Hyper = Meh+Gui
- *                                 │ Space│ Enter│ App  │       │ Beakl│      │ BkSp │        Meh = Control+Alt+Shift
- *                                 │  /   │  /   ├──────┤       ├──────┤ TAB  │  /   │        GUI = Super or Win key
- *                                 │ Ctrl │ Alt  │ PScr │       │ Del  │      │ Sym  │        App = Menu key
+ *                                 │ Space│ Enter│ App  │       │ Beakl│      │      │        Meh = Control+Alt+Shift
+ *                                 │  /   │  /   ├──────┤       ├──────┤ Del  │ Sym  │        GUI = Super or Win key
+ *                                 │ Ctrl │ Alt  │ PScr │       │ DHome│      │      │        App = Menu key
  *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯        OSL = One-Shot Layer
  */
 	// left hand
@@ -128,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	KC_LGUI,	TG(QWER),
 	TG(BEAKL),
-	KC_DELT,	KC_TAB,	LT(SYMB,KC_BSPC)
+	TG(DUALHOME),	KC_DELT,	MO(SYMB)
 ),
 [BEAKL] = KEYMAP(
 /* BEAKL-9 [http://www.shenafu.com/code/keyboard/beakl/index.php]
@@ -384,6 +385,48 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_WH_U,	KC_MS_LEFT,	KC_MS_DOWN,	KC_MS_RIGHT,	KC_WH_D,	KC_AUDIO_VOL_DOWN,
 	__x___,	KC_WH_D,	__x___,	__x___,	__x___,	__x___,	KC_AUDIO_MUTE,
 			__x___,	__x___,	__x___,	KC_MEDIA_PREV_TRACK,	KC_MEDIA_NEXT_TRACK,
+	______,	______,
+	______,
+	______,	______,	______
+),
+[DUALHOME] = KEYMAP(
+/* Enable dual-key home row with modifiers
+ *
+ * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
+ * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
+ * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
+ * │        │ SFT  │ CTL  │  ALT │     •│      ├──────┤           ├──────┤      │•     │  ALT │ CTL  │  SFT │        │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
+ * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
+ * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
+ *   │      │      │      │      │      │                                       │      │      │      │      │      │
+ *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
+ *                                        ╭──────┬──────╮       ╭──────┬──────╮
+ *                                        │      │      │       │      │      │
+ *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮
+ *                                 │      │      │      │       │      │      │      │
+ *                                 │      │      ├──────┤       ├──────┤      │      │
+ *                                 │      │      │      │       │      │      │      │
+ *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
+ */
+	// left hand
+	______,	______,	______,	______,	______,	______,	______,
+	______,	______,	______,	______,	______,	______,	______,
+	______,	SFT_T(KC_A),	CTL_T(KC_O),	ALT_T(KC_E),	______,	______,
+	______,	______,	______,	______,	______,	______,	______,
+	______,	______,	______,	______,	______,
+	______,	______,
+	______,
+	______,	______,	______,
+
+	// right hand
+	______,	______,	______,	______,	______,	______,	______,
+	______,	______,	______,	______,	______,	______,	______,
+		______,	______,	ALT_T(KC_T),	CTL_T(KC_N),	SFT_T(KC_S),	______,
+	______,	______,	______,	______,	______,	______,	______,
+			______,	______,	______,	______,	______,
 	______,	______,
 	______,
 	______,	______,	______
