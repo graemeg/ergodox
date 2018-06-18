@@ -19,7 +19,7 @@
     gmake ergodox_ez:gg_dvorak:teensy
 */
 
-#define GG_VERSION "1.26"
+#define GG_VERSION "1.26.1"
 
 #define CUT      LCTL(KC_X)	// C-x Cut
 #define COPY     LCTL(KC_C)	// C-c Copy
@@ -98,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
  * │ Shift  │  A   │  O   │  E   │  U • │   I  ├──────┤           ├──────┤   D  │ • H  │  T   │  N   │  S   │   ─   _│
  * ├────────┼──────┼──────┼──────┼──────┼──────┤  :=  │           │ Enter├──────┼──────┼──────┼──────┼──────┼────────┤
- * │ Shift  │  ;  :│  Q   │  J   │  K   │   X  │      │           │      │   B  │   M  │  W   │  V   │  Z   │ SFT/Ent│
+ * │ Shift  │  ;  :│  Q   │  J   │  K   │   X  │      │           │      │   B  │   M  │  W   │  V   │  Z   │  Shift │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
  *   │LCtrl │ LAlt │CP/CUT│ PASTE│ MOUSE│                                       │  ◀   │   ▲  │   ▼  │  ▶   │ RCtrl│
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
@@ -125,7 +125,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_F12,	KC_F6,	KC_F7,	KC_F8,	KC_F9,	KC_F10,	KC_BSLS,
 	KC_BSPC,	KC_F,	KC_G,	KC_C,	KC_R,	KC_L,	KC_SLSH,
 		KC_D,	KC_H,	KC_T,	KC_N,	KC_S,	KC_MINS,
-	KC_ENT,	KC_B,	KC_M,	KC_W,	KC_V,	KC_Z,	KC_SFTENT,
+	KC_ENT,	KC_B,	KC_M,	KC_W,	KC_V,	KC_Z,	KC_RSFT,
 			LT(SYMB2,KC_LEFT),	KC_UP,	KC_DOWN,	KC_RIGHT,	KC_RCTRL,
 
 	KC_LGUI,	TG(QWER),
@@ -269,15 +269,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
  * │        │ Shift│ Ctrl │ Alt  │     •│      ├──────┤           ├──────┤ PgUp │•  ◀  │  ▼   │   ▶  │  Ins │        │
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
- * │        │      │      │      │      │      │      │           │      │ PgDn │      │      │      │      │        │
+ * │        │      │      │      │      │      │      │           │      │ PgDn │ PgUp │      │ PgDn │      │        │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
  *   │      │      │      │      │      │                                       │      │      │      │      │ SLCK │
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
- *                                        ╭──────┬──────╮       ╭──────┬──────╮                                   
+ *                                        ╭──────┬──────╮       ╭──────┬──────╮
  *                                        │      │      │       │      │      │
- *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮        ESC = Reset         
- *                                 │      │      │      │       │      │Shift+│      │       PScr = Version       
- *                                 │      │      ├──────┤       ├──────┤ Ctrl │ Ctrl │                            
+ *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮        ESC = Reset
+ *                                 │      │      │      │       │      │Shift+│      │       PScr = Version
+ *                                 │      │      ├──────┤       ├──────┤ Ctrl │ Ctrl │
  *                                 │      │      │  VER │       │      │      │      │
  *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
  */
@@ -295,7 +295,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	__x___,	__x___,	__x___,	__x___,	__x___,	__x___,	__x___,
 	______,	__x___,	KC_HOME,	KC_UP,	KC_END,	__x___,	__x___,
 		KC_PGUP,	KC_LEFT,	KC_DOWN,	KC_RIGHT,	KC_INS,	__x___,
-	______,	KC_PGDN,	__x___,	__x___,	__x___,	__x___,	__x___,
+	______,	KC_PGDN,	KC_PGUP,	KC_PGDN,	__x___,	__x___,	__x___,
 			__x___,	__x___,	__x___,	__x___,	KC_SLCK,
 	______,	______,
 	______,
