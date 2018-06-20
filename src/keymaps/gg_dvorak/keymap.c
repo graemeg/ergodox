@@ -19,7 +19,7 @@
     gmake ergodox_ez:gg_dvorak:teensy
 */
 
-#define GG_VERSION "1.26.1"
+#define GG_VERSION "1.26.2"
 
 #define CUT      LCTL(KC_X)	// C-x Cut
 #define COPY     LCTL(KC_C)	// C-c Copy

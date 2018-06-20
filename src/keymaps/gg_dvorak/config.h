@@ -6,6 +6,7 @@
 #define PREVENT_STUCK_MODIFIERS
 #define PERMISSIVE_HOLD			/* https://github.com/qmk/qmk_firmware/pull/1359/  */
 #define IGNORE_MOD_TAP_INTERRUPT	/* https://github.com/qmk/qmk_firmware/issues/142  */
+#define FORCE_NKRO	// Apparently the rules.mk setting doesn't always take effect
 
 #undef MANUFACTURER
 #define MANUFACTURER    Built by Graeme Geldenhuys
