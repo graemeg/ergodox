@@ -19,7 +19,7 @@
     gmake ergodox_ez:gg_dvorak:teensy
 */
 
-#define GG_VERSION "1.26.2"
+#define GG_VERSION "1.27"
 
 #define CUT      LCTL(KC_X)	// C-x Cut
 #define COPY     LCTL(KC_C)	// C-c Copy
@@ -92,51 +92,51 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer                                                  Version: 1.xx
  *
  * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
- * │  Esc   │  F1  │  F2  │  F3  │  F4  │  F5  │  F11 │           │  F12 │  F6  │  F7  │  F8  │  F9  │  F10 │   \   |│
+ * │  Esc   │  F1  │  F2  │  F3  │  F4  │  F5  │  F11 │           │  F12 │  F6  │  F7  │  F8  │  F9  │  F10 │  Home  │
  * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
- * │  Tab   │  '  "│  ,  <│  .  >│  P   │   Y  │ Hyper│           │ BkSp │   F  │   G  │  C   │  R   │  L   │   /   ?│
+ * │  Tab   │  '  "│  ,  <│  .  >│  P   │   Y  │ Hyper│           │ PgUp │   F  │   G  │  C   │  R   │  L   │   End  │
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
- * │ Shift  │  A   │  O   │  E   │  U • │   I  ├──────┤           ├──────┤   D  │ • H  │  T   │  N   │  S   │   ─   _│
- * ├────────┼──────┼──────┼──────┼──────┼──────┤  :=  │           │ Enter├──────┼──────┼──────┼──────┼──────┼────────┤
- * │ Shift  │  ;  :│  Q   │  J   │  K   │   X  │      │           │      │   B  │   M  │  W   │  V   │  Z   │  Shift │
+ * │  Caps  │  A   │  O   │  E   │  U • │   I  ├──────┤           ├──────┤   D  │ • H  │  T   │  N   │  S   │  Enter │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤  :=  │           │ PgDn ├──────┼──────┼──────┼──────┼──────┼────────┤
+ * │ Shift  │  ;  :│  Q   │  J   │  K   │   X  │      │           │      │   B  │   M  │  W   │  V   │  ▲   │  Shift │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
- *   │LCtrl │ LAlt │CP/CUT│ PASTE│ MOUSE│                                       │  ◀   │   ▲  │   ▼  │  ▶   │ RCtrl│
+ *   │LCtrl │ LAlt │CP/CUT│ PASTE│ MOUSE│                                       │  Del │   Z  │   ◀  │  ▼   │   ▶  │
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
  *                                        ╭──────┬──────╮       ╭──────┬──────╮
- *                                        │ INS  │ CAPS │       │ GUI  │ QWER │
+ *                                        │ INS  │ SLCK │       │ GUI  │ QWER │
  *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮      Hyper = Meh+Gui
  *                                 │ Space│ Enter│ App  │       │ Beakl│      │      │        Meh = Control+Alt+Shift
- *                                 │  /   │  /   ├──────┤       ├──────┤ Del  │ Sym  │        GUI = Super or Win key
+ *                                 │  /   │  /   ├──────┤       ├──────┤ BkSp │ Sym  │        GUI = Super or Win key
  *                                 │ Ctrl │ Alt  │ PScr │       │ DHome│      │      │        App = Menu key
  *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯        OSL = One-Shot Layer
  */
 	// left hand
 	KC_ESC,	KC_F1,	KC_F2,	KC_F3,	KC_F4,	KC_F5,	KC_F11,
 	KC_TAB,	KC_QUOT,	KC_COMM,	KC_DOT,	KC_P,	KC_Y,	ALL_T(KC_NO),
-	KC_LSFT,	KC_A,	KC_O,	KC_E,	LT(AROWS,KC_U),	KC_I,
+	KC_CAPS,	KC_A,	KC_O,	KC_E,	LT(AROWS,KC_U),	KC_I,
 	KC_LSFT,	KC_SCLN,	KC_Q,	KC_J,	KC_K,	KC_X,	M(MACRO_ISEQUALS),
 	KC_LCTRL,	KC_LALT,	M(A_COPYCUT),	PASTE,	TT(MOUSE),
 
-	KC_INS,	KC_CAPS,
+	KC_INS,	KC_SLCK,
 	KC_APP,	
 	CTL_T(KC_SPC),	ALT_T(KC_ENT),	KC_PSCR,
 
 	// right hand
-	KC_F12,	KC_F6,	KC_F7,	KC_F8,	KC_F9,	KC_F10,	KC_BSLS,
-	KC_BSPC,	KC_F,	KC_G,	KC_C,	KC_R,	KC_L,	KC_SLSH,
-		KC_D,	KC_H,	KC_T,	KC_N,	KC_S,	KC_MINS,
-	KC_ENT,	KC_B,	KC_M,	KC_W,	KC_V,	KC_Z,	KC_RSFT,
-			LT(SYMB2,KC_LEFT),	KC_UP,	KC_DOWN,	KC_RIGHT,	KC_RCTRL,
+	KC_F12,	KC_F6,	KC_F7,	KC_F8,	KC_F9,	KC_F10,	KC_HOME,
+	KC_PGUP,	KC_F,	KC_G,	KC_C,	KC_R,	KC_L,	KC_END,
+		KC_D,	KC_H,	KC_T,	KC_N,	KC_S,	KC_ENT,
+	KC_PGDN,	KC_B,	KC_M,	KC_W,	KC_V,	KC_UP,	KC_RSFT,
+			LT(SYMB2,KC_DELT),	KC_Z,	KC_LEFT,	KC_DOWN,	KC_RIGHT,
 
 	KC_LGUI,	TG(QWER),
 	TG(BEAKL9),
-	TG(DUALHOME),	KC_DELT,	MO(SYMB)
+	TG(DUALHOME),	KC_BSPC,	TT(SYMB)
 ),
 [DUALHOME] = KEYMAP(
 /* Enable dual-key Dvorak home row with modifiers
  *
  * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
- * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
+ * │        │  1  !│  2  @│  3  #│  4  $│   5 %│      │           │      │   6 ^│   7 &│  8  *│  9  (│  0  )│        │
  * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
  * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
@@ -155,7 +155,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
  */
 	// left hand
-	______,	______,	______,	______,	______,	______,	______,
+	______,	KC_1,	KC_2,	KC_3,	KC_4,	KC_5,	______,
 	______,	______,	______,	______,	______,	______,	______,
 	______,	SFT_T(KC_A),	CTL_T(KC_O),	ALT_T(KC_E),	______,	______,
 	______,	______,	______,	______,	______,	______,	______,
@@ -165,7 +165,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	______,	______,	______,
 
 	// right hand
-	______,	______,	______,	______,	______,	______,	______,
+	______,	KC_6,	KC_7,	KC_8,	KC_9,	KC_0,	______,
 	______,	______,	______,	______,	______,	______,	______,
 		______,	______,	ALT_T(KC_T),	CTL_T(KC_N),	SFT_T(KC_S),	______,
 	______,	______,	______,	______,	______,	______,	______,
@@ -314,7 +314,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
  * │        │   Z  │   X  │   C  │   V  │   B  │      │           │      │   N  │   M  │   ,  │   .  │   /  │        │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
- *   │      │      │      │      │ Space│                                       │      │      │      │      │      │
+ *   │      │      │      │      │ Space│                                       │      │      │      │      │ RCtrl│
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
  *                                        ╭──────┬──────╮       ╭──────┬──────╮
  *                                        │      │      │       │      │      │
@@ -340,7 +340,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	______,	KC_Y,	KC_U,	KC_I,	KC_O,	KC_P,	______,
 		KC_H,	KC_J,	KC_K,	KC_L,	KC_SCLN,	______,	
 	______,	KC_N,	KC_M,	KC_COMM,	KC_DOT,	KC_SLSH,	______,
-			______,	______,	______,	______,	______,
+			______,	______,	______,	______,	KC_RCTRL,
 
 	______,	______,
 	______,
@@ -352,11 +352,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
  * │   ~    │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
  * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
- * │   `    │  !   │  @   │  #   │  $   │  %   │      │           │      │  ^   │  &   │  *   │  -   │  =   │        │
+ * │   `    │  !   │  @   │  #   │  $   │  %   │      │           │      │  ^   │  &   │  *   │  -   │  =   │   ?    │
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
  * │        │  1   │  2   │  3   │  4  •│  5   ├──────┤           ├──────┤  6   │• 7   │  8   │  9   │  0   │   .    │
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
- * │        │  |   │  \   │  (   │  {   │  [   │      │           │      │  ]   │  }   │  )   │  _   │  +   │        │
+ * │        │  /   │  \   │  (   │  {   │  [   │      │           │      │  ]   │  }   │  )   │  _   │  +   │   |    │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
  *   │      │      │      │      │      │                                       │      │      │      │      │      │
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
@@ -372,7 +372,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_TILD,	______,	______,	______,	______,	______,	______,
 	KC_GRAVE,	KC_EXLM,	KC_AT,	KC_HASH,	KC_DLR,	KC_PERC,	______,
 	______,	KC_1,	KC_2,	KC_3,	KC_4,	KC_5,
-	______,	KC_PIPE,	KC_BSLASH,	KC_LPRN,	KC_LCBR,	KC_LBRACKET,	______,
+	______,	KC_SLSH,	KC_BSLASH,	KC_LPRN,	KC_LCBR,	KC_LBRACKET,	______,
 	______,	______,	______,	______,	______,
 
 	______,	______,
@@ -381,9 +381,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	// right hand
 	______,	______,	______,	______,	______,	______,	______,
-	______,	KC_CIRC,	KC_AMPR,	KC_ASTR,	KC_MINUS,	KC_EQUAL,	______,
+	______,	KC_CIRC,	KC_AMPR,	KC_ASTR,	KC_MINUS,	KC_EQUAL,	KC_QUES,
 		KC_6,	KC_7,	KC_8,	KC_9,	KC_0,	KC_DOT,
-	______,	KC_RBRACKET,	KC_RCBR,	KC_RPRN,	KC_UNDS,	KC_PLUS,	______,
+	______,	KC_RBRACKET,	KC_RCBR,	KC_RPRN,	KC_UNDS,	KC_PLUS,	KC_PIPE,
 	______,	______,	______,	______,	______,
 
 	______,	______,

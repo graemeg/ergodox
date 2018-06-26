@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 KEYBOARD=ergodox_ez
 KEYMAP=gg_dvorak
 QMK_DIR=qmk_firmware
