@@ -94,28 +94,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
  * │  Esc   │  F1  │  F2  │  F3  │  F4  │  F5  │  F11 │           │  F12 │  F6  │  F7  │  F8  │  F9  │  F10 │  Home  │
  * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
- * │  Tab   │  '  "│  ,  <│  .  >│  P   │   Y  │ Hyper│           │ PgUp │   F  │   G  │  C   │  R   │  L   │   End  │
- * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
+ * │  Tab   │  '  "│  ,  <│  .  >│  P   │   Y  │ Cut/ │           │ PgUp │   F  │   G  │  C   │  R   │  L   │   End  │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤ Copy │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
  * │  Caps  │  A   │  O   │  E   │  U • │   I  ├──────┤           ├──────┤   D  │ • H  │  T   │  N   │  S   │  Enter │
- * ├────────┼──────┼──────┼──────┼──────┼──────┤  :=  │           │ PgDn ├──────┼──────┼──────┼──────┼──────┼────────┤
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤ Paste│           │ PgDn ├──────┼──────┼──────┼──────┼──────┼────────┤
  * │ Shift  │  ;  :│  Q   │  J   │  K   │   X  │      │           │      │   B  │   M  │  W   │  V   │  ▲   │  Shift │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
- *   │LCtrl │ LAlt │CP/CUT│ PASTE│ MOUSE│                                       │  Del │   Z  │   ◀  │  ▼   │   ▶  │
+ *   │LCtrl │ LAlt │  :=  │      │ Arrw │                                       │  Del │   Z  │   ◀  │  ▼   │   ▶  │
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
  *                                        ╭──────┬──────╮       ╭──────┬──────╮
  *                                        │ INS  │ SLCK │       │ GUI  │ QWER │
  *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮      Hyper = Meh+Gui
  *                                 │ Space│ Enter│ App  │       │ Beakl│      │      │        Meh = Control+Alt+Shift
- *                                 │  /   │  /   ├──────┤       ├──────┤ BkSp │ Sym  │        GUI = Super or Win key
+ *                                 │  /   │  /   ├──────┤       ├──────┤ BkSp │ Sym2 │        GUI = Super or Win key
  *                                 │ Ctrl │ Alt  │ PScr │       │ DHome│      │      │        App = Menu key
  *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯        OSL = One-Shot Layer
  */
 	// left hand
 	KC_ESC,	KC_F1,	KC_F2,	KC_F3,	KC_F4,	KC_F5,	KC_F11,
-	KC_TAB,	KC_QUOT,	KC_COMM,	KC_DOT,	KC_P,	KC_Y,	ALL_T(KC_NO),
-	KC_CAPS,	KC_A,	KC_O,	KC_E,	LT(AROWS,KC_U),	KC_I,
-	KC_LSFT,	KC_SCLN,	KC_Q,	KC_J,	KC_K,	KC_X,	M(MACRO_ISEQUALS),
-	KC_LCTRL,	KC_LALT,	M(A_COPYCUT),	PASTE,	TT(MOUSE),
+	KC_TAB,	KC_QUOT,	KC_COMM,	KC_DOT,	KC_P,	KC_Y,	M(A_COPYCUT),
+	KC_CAPS,	KC_A,	KC_O,	KC_E,	KC_U,	KC_I,
+	KC_LSFT,	KC_SCLN,	KC_Q,	KC_J,	KC_K,	KC_X,	PASTE,
+	KC_LCTRL,	KC_LALT,	M(MACRO_ISEQUALS),	__x___,	MO(AROWS),
 
 	KC_INS,	KC_SLCK,
 	KC_APP,	
@@ -130,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	KC_LGUI,	TG(QWER),
 	TG(BEAKL9),
-	TG(DUALHOME),	KC_BSPC,	TT(SYMB2)
+	TG(DUALHOME),	KC_BSPC,	MO(SYMB2)
 ),
 [DUALHOME] = KEYMAP(
 /* Enable dual-key Dvorak home row with modifiers
@@ -157,7 +157,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	// left hand
 	______,	KC_1,	KC_2,	KC_3,	KC_4,	KC_5,	______,
 	______,	______,	______,	______,	______,	______,	______,
-	______,	SFT_T(KC_A),	CTL_T(KC_O),	ALT_T(KC_E),	______,	______,
+	______,	SFT_T(KC_A),	CTL_T(KC_O),	ALT_T(KC_E),	LT(AROWS,KC_U),	______,
 	______,	______,	______,	______,	______,	______,	______,
 	______,	______,	______,	______,	______,
 	______,	______,
