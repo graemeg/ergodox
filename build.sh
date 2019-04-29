@@ -1,9 +1,9 @@
 #!/bin/sh
 KEYBOARD=ergodox_ez
-KEYMAP=gg_dvorak
+KEYMAP=gg_dvorak_beakl15
 QMK_DIR=qmk_firmware
 # FreeBSD uses 'gmake', Linux uses 'make'
-MAKECMD=gmake
+MAKECMD=make
 
 # 0. Clean
 rm -rf .build
