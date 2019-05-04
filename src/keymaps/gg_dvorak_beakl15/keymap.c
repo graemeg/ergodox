@@ -10,7 +10,7 @@
 
 /*
   Author: Graeme Geldenhuys <graeme@geldenhuys.co.uk>
-  Ver 7.1
+  Ver 9
   Based on the default Dvorak keymap, and applied some
   tweaks from the TypeMatrix 2030 design. Some key locations are also
   designed to work well with my programming environment (FPC +Lazarus).
@@ -32,10 +32,9 @@ enum {
 	BASE = 0,	// default layer
 	BEAKL1,	// BEAKL-15 unshifted layer
 	SYMB,	// symbols + NumPad
-	Arrows,	// arrows, PgUp, PgDn, Home, End
+	ARROWS,	// arrows, PgUp, PgDn, Home, End
 	GAME,	// easier for gaming
-	BEAKL2,	// BEAKL-15 shifted layer
-	FKeys,	// F-keys
+	FKEYS,	// F-keys
 	QWER,	// QWERTY
 	MOUSE,	// Mouse navigation
 	SHORT	// shortcuts
@@ -83,54 +82,54 @@ static uint16_t m_copypaste_timer;
 	MEH_T(...) = Meh
 
 	For layer switching options and explanation, see the following page:
-	   https://docs.qmk.fm/feature_common_shortcuts.html#switching-and-toggling-layer
+	   https://docs.qmk.fm/#/feature_advanced_keycodes?id=switching-and-toggling-layers
 
 	I also have Space-Cadet Shift keys enabled and disabled command mode via the Makefile.
 */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [BASE] = LAYOUT_ergodox(
-/* Keymap 0: Basic layer                                                  Version: 7.1
+/* Keymap 0: Basic layer                                                  Version: 9
  *
  * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
- * │  Esc   │  1   │  2   │  3   │  4   │   5  │  F11 │           │  F12 │   6  │   7  │  8   │  9   │  0   │   \   |│
+ * │  Esc   │  1   │  2   │  3   │  4   │   5  │  F11 │           │  F12 │   6  │   7  │  8   │  9   │  0   │  Home  │
  * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
- * │  Tab   │  '  "│  ,  <│  .  >│  P   │   Y  │ Hyper│           │ Hyper│   F  │   G  │  C   │  R   │  L   │   /   ?│
- * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
- * │   -    │  A   │  O   │  E   │  U •²│   I  ├──────┤           ├──────┤   D  │ • H  │  T   │  N   │  S   │   ─   _│
- * ├────────┼──────┼──────┼──────┼──────┼──────┤  :=  │           │  Meh ├──────┼──────┼──────┼──────┼──────┼────────┤
+ * │  Tab   │  '  "│  ,  <│  .  >│  P   │   Y  │ Cut/ │           │ BkSp │   F  │   G  │  C   │  R   │  L   │   End  │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤  Copy│           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
+ * │   -    │  A   │  O   │  E   │  U • │   I  ├──────┤           ├──────┤   D  │ • H  │  T   │  N   │  S   │   ;    │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤ Paste│           │ Enter├──────┼──────┼──────┼──────┼──────┼────────┤
  * │ Shift  │  /  ?│   Q  │   J  │  K   │   X  │      │           │      │   B  │   M  │  W   │  V   │  Z   │  Shift │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
- *   │LCtrl │ LAlt │CP/CUT│ PASTE│~MOUSE│                                       │  ◀   │   ▲  │   ▼  │  ▶   │ RCtrl│
+ *   │LCtrl │ LAlt │      │      │~Arows│                                       │~FK/ ◀│   ▲  │   ▼  │  ▶   │ RCtrl│
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
  *                                        ╭──────┬──────╮       ╭──────┬──────╮
- *                                        │ INS  │ CAPS │       │ GUI  │ QWER │
+ *                                        │ Game │ BEAKL│       │ GUI  │ Menu │
  *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮      Hyper = Meh+Gui
- *                                 │ TAB  │      │ App  │       │ PgUp │      │ Space│        Meh = Control+Alt+Shift
- *                                 │  /   │ BkSp ├──────┤       ├──────┤ Enter│   /  │        GUI = Super or Win key
- *                                 │ Ctrl │      │ PScr │       │ Del  │      │ ~SYMB│        App = Menu key
+ *                                 │      │      │ PScr │       │ ScrLk│      │ ~Symb│        Meh = Control+Alt+Shift
+ *                                 │ Space│ BkSp ├──────┤       ├──────┤  Del │   /  │        GUI = Super or Win key
+ *                                 │      │      │ Tab  │       │ Caps │      │  TAB │        App = Menu key
  *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
  */
 	// left hand
 	KC_ESCAPE,	KC_1,	KC_2,	KC_3,	KC_4,	KC_5,	KC_F11,
-	KC_TAB,	KC_QUOTE,	KC_COMMA,	KC_DOT,	KC_P,	KC_Y,	KC_MEH,
-	KC_MINUS,	KC_A,	KC_O,	KC_E,	LT(Arrows,KC_U),	KC_I,
-	KC_LSHIFT,	KC_SLASH,	KC_Q,	KC_J,	KC_K,	KC_X,	TG(FKeys),
-	KC_LCTRL,	KC_LALT,	LCTL(KC_X),	LCTL(KC_C),	LCTL(KC_V),
+	KC_TAB,	KC_QUOTE,	KC_COMMA,	KC_DOT,	KC_P,	KC_Y,	M(A_COPYCUT),
+	KC_MINUS,	KC_A,	KC_O,	KC_E,	KC_U,	KC_I,
+	KC_LSHIFT,	KC_SLASH,	KC_Q,	KC_J,	KC_K,	KC_X,	LCTL(KC_V),
+	KC_LCTRL,	KC_LALT,	__x___,	__x___,	MO(ARROWS),
 	
 	TG(GAME),	TG(BEAKL1),
 	KC_PSCREEN,
 	KC_SPACE,	KC_ENTER,	KC_TAB,
 	
 	// right hand
-	KC_F12,	KC_6,	KC_7,	KC_8,	KC_9,	KC_0,	__x___,
+	KC_F12,	KC_6,	KC_7,	KC_8,	KC_9,	KC_0,	KC_CAPSLOCK,
 	KC_BSPACE,	KC_F,	KC_G,	KC_C,	KC_R,	KC_L,	__x___,
 		KC_D,	KC_H,	KC_T,	KC_N,	KC_S,	KC_SCOLON,
 	KC_ENTER,	KC_B,	KC_M,	KC_W,	KC_V,	KC_Z,	KC_RSHIFT,
-			LT(FKeys,KC_LEFT),	KC_UP,	KC_DOWN,	KC_RIGHT,	KC_RCTRL,
+			LT(FKEYS,KC_LEFT),	KC_UP,	KC_DOWN,	KC_RIGHT,	KC_RCTRL,
 	
 	KC_RGUI,	KC_APPLICATION,
 	KC_SCROLLLOCK,
-	KC_CAPSLOCK,	KC_DELETE,	MO(SYMB)
+	KC_CAPSLOCK,	KC_DELETE,	LT(SYMB, KC_TAB)
 ),
 
 
@@ -138,29 +137,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 1: BEAKL-15
  *
  * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
- * │  Esc   │  1   │  2   │  3   │  4   │   5  │  F11 │           │  F12 │   6  │   7  │  8   │  9   │  0   │   \   |│
+ * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
  * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
- * │  Tab   │  '  "│  ,  <│  .  >│  P   │   Y  │ Hyper│           │ Hyper│   F  │   G  │  C   │  R   │  L   │   /   ?│
- * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
- * │   -    │  A   │  O   │  E   │  U •²│   I  ├──────┤           ├──────┤   D  │ • H  │  T   │  N   │  S   │   ─   _│
- * ├────────┼──────┼──────┼──────┼──────┼──────┤  :=  │           │  Meh ├──────┼──────┼──────┼──────┼──────┼────────┤
- * │ Shift  │  /  ?│   Q  │   J  │  K   │   X  │      │           │      │   B  │   M  │  W   │  V   │  Z   │  Shift │
+ * │        │  Q   │  H   │  O   │  U   │   X  │ Cut/ │           │ BkSp │   G  │   C  │  R   │  F   │  Z   │        │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤  Copy│           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
+ * │        │  Y   │  I   │  E   │  A • │   .  ├──────┤           ├──────┤   D  │ • S  │  T   │  N   │  B   │        │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤ Paste│           │ Enter├──────┼──────┼──────┼──────┼──────┼────────┤
+ * │ Shift  │  J   │  /  ?│  ,   │  K   │   '  │      │           │      │   W  │   M  │  L   │  P   │  V   │  Shift │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
- *   │LCtrl │ LAlt │CP/CUT│ PASTE│~MOUSE│                                       │  ◀   │   ▲  │   ▼  │  ▶   │ RCtrl│
+ *   │      │      │      │      │      │                                       │      │      │      │      │      │
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
  *                                        ╭──────┬──────╮       ╭──────┬──────╮
- *                                        │ INS  │ CAPS │       │ GUI  │ QWER │
+ *                                        │      │      │       │      │      │
  *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮      Hyper = Meh+Gui
- *                                 │ TAB  │      │ App  │       │ PgUp │      │ Space│        Meh = Control+Alt+Shift
- *                                 │  /   │ BkSp ├──────┤       ├──────┤ Enter│   /  │        GUI = Super or Win key
- *                                 │ Ctrl │      │ PScr │       │ Del  │      │ ~SYMB│        App = Menu key
+ *                                 │      │      │      │       │      │      │      │        Meh = Control+Alt+Shift
+ *                                 │      │      ├──────┤       ├──────┤      │      │        GUI = Super or Win key
+ *                                 │      │      │      │       │      │      │      │        App = Menu key
  *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
  */
 	// left hand
-	KC_ESCAPE,	KC_4,	KC_0,	KC_1,	KC_2,	KC_3,	______,
-	KC_TAB,	KC_Q,	KC_H,	KC_O,	KC_U,	KC_X,	______,
-	KC_MINUS,	KC_Y,	LCTL_T(KC_I),	KC_E,	LT(3,KC_A),	KC_DOT,
-	MO(5),	KC_J,	KC_SLASH,	KC_COMMA,	KC_K,	KC_QUOTE,	______,
+	______,	______,	______,	______,	______,	______,	______,
+	______,	KC_Q,	KC_H,	KC_O,	KC_U,	KC_X,	______,
+	______,	KC_Y,	KC_I,	KC_E,	KC_A,	KC_DOT,
+	______,	KC_J,	KC_SLASH,	KC_COMMA,	KC_K,	KC_QUOTE,	______,
 	______,	______,	______,	______,	______,
 	
 	______,	______,
@@ -168,11 +167,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	______,	______,	______,
 	
 	// right hand
-	______,	KC_7,	KC_6,	KC_5,	KC_9,	KC_8,	______,
+	______,	______,	______,	______,	______,	______,	______,
 	______,	KC_G,	KC_C,	KC_R,	KC_F,	KC_Z,	______,
-		KC_D,	KC_S,	KC_T,	RCTL_T(KC_N),	KC_B,	KC_SCOLON,
-	______,	KC_W,	KC_M,	KC_L,	KC_P,	KC_V,	MO(5),
-			______,	KC_NO,	KC_NO,	KC_RALT,	______,
+		KC_D,	KC_S,	KC_T,	KC_N,	KC_B,	______,
+	______,	KC_W,	KC_M,	KC_L,	KC_P,	KC_V,	______,
+			______,	______,	______,	______,	______,
 	
 	______,	______,
 	______,
@@ -190,17 +189,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
  * │        │  \   │  (   │  "   │  ) • │  #   ├──────┤           ├──────┤  %   │•  {  │  =   │  }   │  |   │        │
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
- * │        │  /   │  :   │  *   │  +   │      │      │           │      │      │   &  │  ^   │  ~   │      │        │
+ * │        │      │  :   │  *   │  +   │      │      │           │      │      │   &  │  ^   │  ~   │      │        │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
  *   │      │      │      │      │      │                                       │      │      │      │      │      │  
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯  
- *                                        ╭──────┬──────╮       ╭──────┬────────╮
- *                                        │      │      │       │      │        │
- *                                 ╭──────┼──────┼──────┤       ├──────┼────────┼──────╮
- *                                 │      │      │      │       │      │        │      │
- *                                 │      │      ├──────┤       ├──────┤        │      │
- *                                 │      │      │      │       │      │        │      │
- *                                 ╰──────┴──────┴──────╯       ╰──────┴────────┴──────╯
+ *                                        ╭──────┬──────╮       ╭──────┬──────╮
+ *                                        │      │      │       │      │      │
+ *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮
+ *                                 │      │      │      │       │      │      │      │
+ *                                 │      │      ├──────┤       ├──────┤      │      │
+ *                                 │      │      │      │       │      │      │      │
+ *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
  */
 	// left hand
 	______,	______,	______,	UC(0x00ac),	UC(0x20ac),	______,	______,
@@ -225,7 +224,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	______,	______,	______
 ),
 
-[Arrows] = LAYOUT_ergodox(
+[ARROWS] = LAYOUT_ergodox(
 /* Keymap 2: Symbol Layer (right hand)
  *
  * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
@@ -237,15 +236,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
  * │        │      │      │      │      │      │      │           │      │      │ PgUp │      │ PgDn │      │        │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
- *   │      │      │      │      │      │                                       │      │      │      │      │ SLCK │
+ *   │      │      │      │      │~Arows│                                       │ Ctrl │      │      │      │ SLCK │
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
- *                                        ╭──────┬──────╮       ╭──────┬────────╮                                   
- *                                        │      │      │       │      │        │             *** left hand ***     
- *                                 ╭──────┼──────┼──────┤       ├──────┼────────┼──────╮        ESC = Reset         
- *                                 │      │      │      │       │      │        │      │       PScr = Version       
- *                                 │      │      ├──────┤       ├──────┤        │      │                            
- *                                 │      │      │  VER │       │      │        │      │
- *                                 ╰──────┴──────┴──────╯       ╰──────┴────────┴──────╯
+ *                                        ╭──────┬──────╮       ╭──────┬──────╮                                   
+ *                                        │      │      │       │      │      │
+ *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮
+ *                                 │      │      │      │       │      │      │ Shift│
+ *                                 │ Shift│      ├──────┤       ├──────┤  Alt │   +  │
+ *                                 │      │      │  VER │       │      │      │ Ctrl │
+ *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
  */
 	// left hand
 	RESET,	______,	______,	______,	______,	______,	______,
@@ -263,7 +262,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	______,	______,	KC_HOME,	KC_UP,	KC_END,	______,	______,
 		______,	KC_LEFT,	KC_DOWN,	KC_RIGHT,	KC_INSERT,	______,
 	______,	______,	KC_PGUP,	______,	KC_PGDOWN,	______,	______,
-	KC_LCTRL,	______,	______,	______,	______,
+			KC_LCTRL,	______,	______,	______,	______,
 	
 	______,	______,
 	______,
@@ -285,13 +284,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
  *   │      │      │      │      │ Space│                                       │      │      │      │      │      │
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
- *                                        ╭──────┬──────╮       ╭──────┬────────╮
- *                                        │      │      │       │      │        │
- *                                 ╭──────┼──────┼──────┤       ├──────┼────────┼──────╮
- *                                 │      │      │      │       │      │        │      │
- *                                 │      │      ├──────┤       ├──────┤        │      │
- *                                 │      │      │      │       │      │        │      │
- *                                 ╰──────┴──────┴──────╯       ╰──────┴────────┴──────╯
+ *                                        ╭──────┬──────╮       ╭──────┬──────╮
+ *                                        │      │      │       │      │      │
+ *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮
+ *                                 │      │      │      │       │      │      │      │
+ *                                 │      │      ├──────┤       ├──────┤      │      │
+ *                                 │      │      │      │       │      │      │      │
+ *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
  */
 	// left hand
 	KC_TRANSPARENT,	KC_1,	KC_2,	KC_3,	KC_4,	KC_5,	KC_TRANSPARENT,
@@ -309,79 +308,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,
 	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,
 	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_RSHIFT,
-	KC_F1,	KC_F2,	KC_F3,	KC_F4,	KC_F5,
+			KC_F1,	KC_F2,	KC_F3,	KC_F4,	KC_F5,
 	
 	KC_TRANSPARENT,	KC_TRANSPARENT,
 	KC_TRANSPARENT,
 	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT
 ),
 
-[BEAKL2] = LAYOUT_ergodox(
-/* Mouse Navigation
- *
- * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
- * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │ Play   │
- * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
- * │        │      │      │      │      │ Acc0 │      │           │  ▲▲  │      │      │ MS ▲ │      │      │ Vol Up │
- * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
- * │        │      │      │ LMB  │ RMB •│ Acc1 ├──────┤           ├──────┤      │• MS◀ │ MS ▼ │ MS▶  │      │ Vol Dwn│
- * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │  ▼▼  ├──────┼──────┼──────┼──────┼──────┼────────┤
- * │        │      │      │      │      │ Acc2 │      │           │      │      │      │      │      │      │  Mute  │
- * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
- *   │      │      │      │      │      │                                       │      │      │      │ Prev │ Next │
- *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
- *                                        ╭──────┬──────╮       ╭──────┬────────╮
- *                                        │      │      │       │      │        │
- *                                 ╭──────┼──────┼──────┤       ├──────┼────────┼──────╮
- *                                 │      │      │      │       │      │        │      │
- *                                 │      │      ├──────┤       ├──────┤        │      │
- *                                 │      │      │      │       │      │        │      │
- *                                 ╰──────┴──────┴──────╯       ╰──────┴────────┴──────╯
- */
-	// left hand
-	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,
-	KC_TRANSPARENT,	LSFT(KC_Q),	LSFT(KC_H),	LSFT(KC_O),	LSFT(KC_U),	LSFT(KC_X),	KC_TRANSPARENT,
-	KC_MINUS,	LSFT(KC_Y),	LSFT(KC_I),	LSFT(KC_E),	LSFT(KC_A),	KC_AT,
-	KC_TRANSPARENT,	LSFT(KC_J),	KC_QUES,	KC_EXLM,	LSFT(KC_K),	KC_GRAVE,	KC_TRANSPARENT,
-	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,
-	
-	KC_TRANSPARENT,	KC_TRANSPARENT,
-	KC_TRANSPARENT,
-	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,
-	
-	// right hand
-	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,
-	KC_TRANSPARENT,	LSFT(KC_G),	LSFT(KC_C),	LSFT(KC_R),	LSFT(KC_F),	LSFT(KC_Z),	KC_TRANSPARENT,
-	LSFT(KC_D),	LSFT(KC_S),	LSFT(KC_T),	LSFT(KC_N),	LSFT(KC_B),	KC_SCOLON,
-	KC_TRANSPARENT,	LSFT(KC_W),	LSFT(KC_M),	LSFT(KC_L),	LSFT(KC_P),	LSFT(KC_V),	KC_TRANSPARENT,
-	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,
-	
-	KC_TRANSPARENT,	KC_TRANSPARENT,
-	KC_TRANSPARENT,
-	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT
-	),
-
-[FKeys] = LAYOUT_ergodox(
+[FKEYS] = LAYOUT_ergodox(
 /* Shortcuts
  *
  * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
  * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
  * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
- * │        │      │      │      │      │      │      │           │      │      │   7  │  8   │  9   │  0   │        │
+ * │        │  F1  │  F2  │  F3  │  F4  │  F5  │      │           │      │  F6  │  F7  │  F8  │  F9  │  F10 │  F11   │
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
- * │        │      │      │      │     •│      ├──────┤           ├──────┤      │•  4  │  5   │  6   │  .   │        │
+ * │        │      │ Ctrl │ Shift│ Alt •│      ├──────┤           ├──────┤      │• Alt │ Shift│ Ctrl │      │  F12   │
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
- * │        │      │      │      │      │      │      │           │      │      │   1  │  2   │  3   │  *   │        │
+ * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
  *   │      │      │      │      │      │                                       │      │      │      │      │      │
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
- *                                        ╭──────┬──────╮       ╭──────┬────────╮
- *                                        │      │      │       │      │        │
- *                                 ╭──────┼──────┼──────┤       ├──────┼────────┼──────╮
- *                                 │      │      │      │       │      │        │      │
- *                                 │      │      ├──────┤       ├──────┤        │      │
- *                                 │      │      │      │       │      │        │      │
- *                                 ╰──────┴──────┴──────╯       ╰──────┴────────┴──────╯
+ *                                        ╭──────┬──────╮       ╭──────┬──────╮
+ *                                        │      │      │       │      │      │
+ *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮
+ *                                 │      │      │      │       │      │      │      │
+ *                                 │      │      ├──────┤       ├──────┤      │      │
+ *                                 │      │      │      │       │      │      │      │
+ *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
  */
 	// left hand
 	KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,
@@ -395,11 +349,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,
 	
 	// right hand
-	KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,
-	KC_TRANSPARENT,KC_F6,KC_F7,KC_F8,KC_F9,KC_F10,KC_F11,
-	KC_TRANSPARENT,KC_RALT,KC_RSHIFT,KC_RCTRL,KC_TRANSPARENT,KC_F12,
-	KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,
-	KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,KC_TRANSPARENT,
+	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,
+	KC_TRANSPARENT,	KC_F6,	KC_F7,	KC_F8,	KC_F9,	KC_F10,	KC_F11,
+		KC_TRANSPARENT,	KC_RALT,	KC_RSHIFT,	KC_RCTRL,	KC_TRANSPARENT,	KC_F12,
+	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,
+			KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,	KC_TRANSPARENT,
 	
 	KC_TRANSPARENT,KC_TRANSPARENT,
 	KC_TRANSPARENT,
@@ -421,13 +375,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
  *   │      │      │      │      │      │                                       │      │      │      │      │      │
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
- *                                        ╭──────┬──────╮       ╭──────┬────────╮
- *                                        │      │      │       │      │        │
- *                                 ╭──────┼──────┼──────┤       ├──────┼────────┼──────╮
- *                                 │      │      │      │       │      │        │      │
- *                                 │      │      ├──────┤       ├──────┤        │      │
- *                                 │      │      │      │       │      │        │      │
- *                                 ╰──────┴──────┴──────╯       ╰──────┴────────┴──────╯
+ *                                        ╭──────┬──────╮       ╭──────┬──────╮
+ *                                        │      │      │       │      │      │
+ *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮
+ *                                 │      │      │      │       │      │      │      │
+ *                                 │      │      ├──────┤       ├──────┤      │      │
+ *                                 │      │      │      │       │      │      │      │
+ *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
  
 	// left hand
 	______,	______,	______,	______,	______,	______,	______,
