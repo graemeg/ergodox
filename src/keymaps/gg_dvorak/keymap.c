@@ -19,7 +19,7 @@
     gmake ergodox_ez:gg_dvorak:teensy
 */
 
-#define GG_VERSION "1.28.2"
+#define GG_VERSION "1.28.3"
 
 #define CUT      LCTL(KC_X)	// C-x Cut
 #define COPY     LCTL(KC_C)	// C-c Copy
@@ -103,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        │ Game │ QWER │       │ GUI  │ App  │
  *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮      Hyper = Meh+Gui
  *                                 │ Space│ Enter│ Beakl│       │ S/Lck│      │      │        Meh = Control+Alt+Shift
- *                                 │  /   │  /   ├──────┤       ├──────┤ Del  │ Sym2 │        GUI = Super, Win or Cmd key
+ *                                 │  /   │  /   ├──────┤       ├──────┤ Del  │ SYMB │        GUI = Super, Win or Cmd key
  *                                 │ Ctrl │ Alt  │ PScr │       │ Caps │      │      │        App = Menu key
  *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯        OSL = One-Shot Layer
  */
@@ -157,6 +157,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_MINUS,	KC_Y,	KC_I,	KC_E,	LT(AROWS,KC_A),	KC_DOT,
 	______,	KC_J,	KC_SLASH,	KC_COMM,	KC_K,	KC_QUOTE,	______,
 	______,	______,	______,	______,	______,
+
 	______,	______,
 	______,
 	______,	______,	______,
@@ -167,9 +168,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_D,	KC_S,	KC_T,	KC_N,	KC_B,	KC_SCLN,
 	______,	KC_W,	KC_M,	KC_L,	KC_P,	KC_V,	______,
 			______,	______,	______,	______,	______,
-	______,	__x___,
+
+	______,	______,
 	______,
-	__x___,	______,	______
+	______,	______,	______
 
 ),
 [SYMB] = LAYOUT_ergodox(
@@ -184,7 +186,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
  * │        │  &   │  ^   │  [   │  ]   │  ~   │      │           │      │  `   │   1  │  2   │  3   │  *   │        │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
- *   │      │      │      │      │      │                                       │   0  │      │      │      │      │
+ *   │      │      │      │      │      │                                       │      │      │      │      │      │
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
  *                                        ╭──────┬──────╮       ╭──────┬──────╮
  *                                        │      │      │       │      │      │
@@ -195,11 +197,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
  */
 	// left hand
-	______,	______,	______,	UC(0x00ac),	UC(0x20ac),	______,	______,
+	______,	__x___,	__x___,	UC(0x00ac),	UC(0x20ac),	__x___,	__x___,
 	______,	KC_EXLM,	KC_AT,	KC_LCBR,	KC_RCBR,	KC_PLUS,	__x___,
 	______,	KC_PERC,	KC_DLR,	KC_LPRN,	KC_RPRN,	KC_EQL,
 	______,	KC_AMPR,	KC_CIRC,	KC_LBRC,	KC_RBRC,	KC_TILD,	__x___,
-	______,	______,	______,	______,	______,
+	______,	__x___,	__x___,	__x___,	__x___,
+
 	______,	______,
 	______,		
 	______,	______,	______,
@@ -210,6 +213,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		KC_HASH,	KC_4,	KC_5,	KC_6,	KC_DOT,	KC_MINUS,
 	______,	KC_GRV,	KC_1,	KC_2,	KC_3,	KC_ASTR,	__x___,
 			__x___,	__x___,	__x___,	__x___,	__x___,
+
 	______,	______,
 	______,		
 	______,	______,	______
@@ -355,7 +359,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
  * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
- *   │      │      │      │      │      │                                       │  F1  │  F2  │  F3  │  F4  │  F5  │
+ *   │      │      │      │      │ Space│                                       │  F1  │  F2  │  F3  │  F4  │  F5  │
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
  *                                        ╭──────┬──────╮       ╭──────┬──────╮
  *                                        │      │      │       │      │      │
