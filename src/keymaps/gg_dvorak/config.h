@@ -6,14 +6,14 @@
 #define PREVENT_STUCK_MODIFIERS
 
 #undef TAPPING_TERM
-#define TAPPING_TERM 300
+#define TAPPING_TERM 210
 //#define PERMISSIVE_HOLD			/* https://github.com/qmk/qmk_firmware/pull/1359/  */
-// #define IGNORE_MOD_TAP_INTERRUPT	/* https://github.com/qmk/qmk_firmware/issues/142  */
+#define IGNORE_MOD_TAP_INTERRUPT	/* https://github.com/qmk/qmk_firmware/issues/142  */
 
 #define FORCE_NKRO	// Apparently the rules.mk setting doesn't always take effect
 
 #undef DEBOUNCE
-#define DEBOUNCE 15  /* This was the previous default and seems to work better for me. */
+#define DEBOUNCE 10  /* This was the previous default and seems to work better for me. */
 
 #undef MANUFACTURER
 #define MANUFACTURER    Built by Graeme Geldenhuys
