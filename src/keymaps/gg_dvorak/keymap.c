@@ -19,7 +19,7 @@
     gmake ergodox_ez:gg_dvorak:teensy
 */
 
-#define GG_VERSION "1.28.4"
+#define GG_VERSION "1.29"
 
 #define CUT      LCTL(KC_X)	// C-x Cut
 #define COPY     LCTL(KC_C)	// C-c Copy
@@ -36,6 +36,8 @@ enum {
 	SYMB,	// symbols + NumPad
 	MOUSE,	// Mouse navigation and Media buttons
 	AROWS,	// arrows, PgUp, PgDn, Home, End
+	GAMES,	// Games (No dual-function keys)
+	SHRTCUT	// Shortcuts & OS Modifiers
 };
 
 /* Macros (aka Actions) */
@@ -102,9 +104,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        ╭──────┬──────╮       ╭──────┬──────╮
  *                                        │ Game │ QWER │       │ GUI  │ App  │
  *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮      Hyper = Meh+Gui
- *                                 │ Space│ Enter│ Beakl│       │ S/Lck│      │      │        Meh = Control+Alt+Shift
- *                                 │  /   │  /   ├──────┤       ├──────┤ Del  │ SYMB │        GUI = Super, Win or Cmd key
- *                                 │ Ctrl │ Alt  │ PScr │       │ Caps │      │      │        App = Menu key
+ *                                 │ Space│ Enter│ Beakl│       │ S/Lck│ Del  │ Space│        Meh = Control+Alt+Shift
+ *                                 │  /   │  /   ├──────┤       ├──────┤  /   │  /   │        GUI = Super, Win or Cmd key
+ *                                 │ Ctrl │ Alt  │ PScr │       │ Caps │ SHRT │ SYMB │        App = Menu key
  *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯        OSL = One-Shot Layer
  */
 	// left hand
@@ -127,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	KC_RGUI,	KC_APP,
 	KC_SLCK,
-	KC_CAPS,	KC_DEL,	MO(SYMB)
+	KC_CAPS,	LT(SHRTCUT, KC_DEL),	LT(SYMB, KC_SPC)
 ),
 [BEAKL15] = LAYOUT_ergodox(
 /* BEAKL-15 [http://www.shenafu.com/code/keyboard/beakl/index.php]
@@ -426,6 +428,48 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		______,	______,	______,	______,	______,	______,
 	______,	______,	______,	______,	______,	______,	______,
 			KC_F1,	KC_F2,	KC_F3,	KC_F4,	KC_F5,
+	______,	______,
+	______,
+	______,	______,	______
+),
+[SHRTCUT] = LAYOUT_ergodox(
+/* Empty template layer - copy and paste usage
+ *
+ * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
+ * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
+ * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
+ * │        │      │      │      │     •│      ├──────┤           ├──────┤      │•     │      │      │      │        │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
+ * │        │      │      │      │      │      │      │           │      │      │      │      │      │      │        │
+ * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
+ *   │      │      │      │      │      │                                       │      │      │      │      │      │
+ *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
+ *                                        ╭──────┬──────╮       ╭──────┬──────╮
+ *                                        │      │      │       │      │      │
+ *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮
+ *                                 │      │      │      │       │      │      │      │
+ *                                 │      │      ├──────┤       ├──────┤      │      │
+ *                                 │      │      │      │       │      │      │      │
+ *                                 ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
+ */
+	// left hand
+	______,	______,	______,	______,	______,	______,	______,
+	______,	______,	______,	______,	______,	______,	______,
+	______,	______,	______,	______,	______,	______,
+	______,	______,	______,	______,	______,	______,	______,
+	______,	______,	______,	______,	______,
+	______,	______,
+	______,
+	______,	______,	______,
+
+	// right hand
+	______,	______,	______,	______,	______,	______,	______,
+	______,	______,	______,	______,	______,	______,	______,
+		______,	OSM(MOD_LCTL),	OSM(MOD_LALT),	OSM(MOD_LCTL | MOD_LALT),	______,	______,
+	______,	______,	OSM(MOD_LSFT | MOD_LCTL),	OSM(MOD_LSFT | MOD_LALT),	OSM(MOD_LSFT | MOD_LCTL | MOD_LALT),	______,	______,
+			______,	______,	______,	______,	______,
 	______,	______,
 	______,
 	______,	______,	______
