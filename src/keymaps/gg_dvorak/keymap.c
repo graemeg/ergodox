@@ -93,16 +93,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
  * │  Esc   │  F1  │  F2  │  F3  │  F4  │  F5  │  F11 │           │  F12 │  F6  │  F7  │  F8  │  F9  │  F10 │   \    │
  * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
- * │  Tab   │  '  "│  ,  <│  .  >│  P   │   Y  │  MAC │           │ BkSp │   F  │   G  │  C   │  R   │  L   │   /    │
+ * │  Tab   │  '  "│  ,  <│  .  >│  P   │   Y  │  DEL │           │ BkSp │   F  │   G  │  C   │  R   │  L   │   /    │
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
  * │  Caps  │  A   │  O   │  E   │  U • │   I  ├──────┤           ├──────┤   D  │ • H  │  T   │  N   │  S   │   -    │
- * ├────────┼──────┼──────┼──────┼──────┼──────┤ MOUSE│           │ Enter├──────┼──────┼──────┼──────┼──────┼────────┤
- * │ Shift  │  ;  :│  Q   │  J   │  K   │   X  │      │           │      │   B  │   M  │  W   │  V   │  Z   │  Shift │
+ * ├────────┼──────┼──────┼──────┼──────┼──────┤ Auto │           │ Enter├──────┼──────┼──────┼──────┼──────┼────────┤
+ * │ Shift  │  ;  :│  Q   │  J   │  K   │   X  │ Shift│           │      │   B  │   M  │  W   │  V   │  Z   │  Shift │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
  *   │LCtrl │ Cmd  │ LAlt │Cut/Cp│~ARROW│                                       │ Caps │  ◀   │  ▲   │  ▼   │  ▶   │
  *   ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
  *                                        ╭──────┬──────╮       ╭──────┬──────╮
- *                                        │ GAME │ QWER │       │ GUI  │ App  │
+ *                                        │ GAME │ QWER │       │ MAC  │ MOUSE│
  *                                 ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮      Hyper = Meh+Gui
  *                                 │ Space│ Enter│ BEAKL│       │ PgUp │ Tab  │      │        Meh = Control+Alt+Shift
  *                                 │  /   │  /   ├──────┤       ├──────┤  /   │~SYMB │        GUI = Super, Win or Cmd key
@@ -111,9 +111,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 	// left hand
 	KC_ESC,	KC_F1,	KC_F2,	KC_F3,	KC_F4,	KC_F5,	KC_F11,
-	KC_TAB,	KC_QUOT,	KC_COMM,	KC_DOT,	KC_P,	KC_Y,	TG(MAC),
+	KC_TAB,	KC_QUOT,	KC_COMM,	KC_DOT,	KC_P,	KC_Y,	KC_DEL,
 	KC_CAPS,	KC_A,	KC_O,	KC_E,	KC_U,	KC_I,
-	KC_LSFT,	KC_SCLN,	KC_Q,	KC_J,	KC_K,	KC_X,	TG(MOUSE),
+	KC_LSFT,	KC_SCLN,	KC_Q,	KC_J,	KC_K,	KC_X,	KC_ASTG,
 	KC_LCTRL,	KC_LGUI,	KC_LALT,	M(A_COPYCUT),	TT(AROWS),
 
 		TG(GAMES),	TG(QWER),
@@ -127,7 +127,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	KC_ENT,	KC_B,	KC_M,	KC_W,	KC_V,	KC_Z,	KC_RSFT,
 			KC_CAPS,	KC_LEFT,	KC_UP,	KC_DOWN,	KC_RIGHT,
 
-	KC_RGUI,	KC_APP,
+	TG(MAC),	TG(MOUSE),
 	KC_PGUP,
 	KC_PGDN,	LT(SHRTCUT, KC_TAB),	MO(SYMB)
 ),
@@ -354,9 +354,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ╭────────┬──────┬──────┬──────┬──────┬──────┬──────╮           ╭──────┬──────┬──────┬──────┬──────┬──────┬────────╮
  * │ RESET  │      │      │      │      │      │      │           │      │      │      │      │      │      │  SLOCK │
  * ├────────┼──────┼──────┼──────┼──────┼──────┼──────┤           ├──────┼──────┼──────┼──────┼──────┼──────┼────────┤
- * │        │      │      │      │      │      │      │           │      │      │ Home │  ▲   │  End │      │        │
+ * │        │      │      │      │      │      │      │           │      │  Ins │ Home │  ▲   │  End │      │        │
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
- * │        │ CMD  │ Shift│ Ctrl │ Alt •│      ├──────┤           ├──────┤      │• ◀   │  ▼   │  ▶   │ Ins  │        │
+ * │        │ CMD  │ Shift│ Ctrl │ Alt •│      ├──────┤           ├──────┤      │• ◀   │  ▼   │  ▶   │      │        │
  * ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │      ├──────┼──────┼──────┼──────┼──────┼────────┤
  * │        │      │      │      │      │      │      │           │      │      │ PgUp │      │ PgDn │      │        │
  * ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
@@ -382,9 +382,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	// right hand
 	__x___,	__x___,	__x___,	__x___,	__x___,	__x___,	KC_SLCK,
-	______,	______,	KC_HOME,	KC_UP,	KC_END,	__x___,	__x___,
-		______,	KC_LEFT,	KC_DOWN,	KC_RIGHT,	KC_INS,	__x___,
-	______,	______,	KC_PGUP,	__x___,	KC_PGDN,	__x___,	__x___,
+	______,	KC_INS,	KC_HOME,	KC_UP,	KC_END,	__x___,	__x___,
+		__x___,	KC_LEFT,	KC_DOWN,	KC_RIGHT,	__x___,	__x___,
+	______,	__x___,	KC_PGUP,	__x___,	KC_PGDN,	__x___,	__x___,
 			______,	______,	______,	______,	__x___,
 	______,	______,
 	______,
