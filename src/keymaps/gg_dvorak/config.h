@@ -16,7 +16,7 @@
 #define AUTO_SHIFT_TIMEOUT 120
 #define NO_AUTO_SHIFT_NUMERIC
 
-#define FORCE_NKRO	// Apparently the rules.mk setting doesn't always take effect
+//#define FORCE_NKRO	// Apparently the rules.mk setting doesn't always take effect
 
 #undef DEBOUNCE
 #define DEBOUNCE 10  /* This was the previous default and seems to work better for me. */
