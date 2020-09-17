@@ -26,3 +26,7 @@
 //#define BEAKL19
 //#define DVORAK
 //#define QWERTY
+
+// Old or New symbol layout?
+#define OLDSYMBL
+//#define NEWSYMBL
