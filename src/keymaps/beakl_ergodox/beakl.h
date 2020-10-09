@@ -1,11 +1,12 @@
 // ............................................................................. BEAKL15
 #ifdef BEAKL15
 [_BASE] = LAYOUT_ergodox_pretty(
-  KC_ESCAPE,      KC_1,           KC_2,           KC_3,           KC_4,           KC_5,           KC_F11,                                         KC_F12,         KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_TRANSPARENT,
+//  KC_ESCAPE,      KC_1,           KC_2,           KC_3,           KC_4,           KC_5,           KC_F11,                                         KC_F12,         KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_TRANSPARENT,
+  KC_ESCAPE,      KC_4,           KC_0,           KC_1,           KC_2,           KC_3,           KC_F11,                                         KC_F12,         KC_7,           KC_6,           KC_5,           KC_9,           KC_8,           KC_TRANSPARENT,
   KC_TAB,         KC_Q,           KC_H,           KC_O,           KC_U,           KC_X,           KC_CAPSLOCK,                                    KC_BSPACE,      KC_G,           KC_C,           KC_R,           KC_F,           KC_Z,           KC_TRANSPARENT,
   KC_MINUS,       KC_Y,           KC_I,           KC_E,           KC_A,           KC_DOT,                                                                         KC_D,           KC_S,           KC_T,           KC_N,           KC_B,           KC_SCOLON,
   MO(_SHIFT),     KC_J,           KC_SLASH,       KC_COMMA,       KC_K,           KC_QUOTE,       KC_DELETE,                                      KC_ENTER,       KC_W,           KC_M,           KC_L,           KC_P,           KC_V,           MO(_SHIFT),
-  KC_LCTRL,       KC_LGUI,        KC_LALT,        LSFT(KC_LCTRL), MO(_NAV),                                                                                                    MO(_MOUSE),    KC_PC_CUT,      KC_PC_COPY,     KC_PC_PASTE,    KC_RCTRL,
+  KC_LCTRL,       KC_LGUI,        KC_LALT,        LSFT(KC_LCTRL), MO(_NAV),                                                                                                       MO(_MOUSE),     KC_PC_CUT,      KC_PC_COPY,     KC_PC_PASTE,    KC_RCTRL,
                                                                                                   TG(_GAME),      KC_PSCREEN,       TG(_MACOS),          TG(_QWERTY),
                                                                                                                   TG(1),            KC_PGUP,
                                                                                   LCTL_T(KC_SPACE),LALT_T(KC_ENTER),KC_CAPSLOCK,    KC_PGDOWN,      KC_TAB,         MO(_SYMBOLS)
@@ -25,7 +26,8 @@
 // ............................................................................. BEAKL19
 #ifdef BEAKL19
 [_BASE] = LAYOUT_ergodox_pretty(
-  KC_ESCAPE,      KC_1,           KC_2,           KC_3,           KC_4,           KC_5,       KC_F11,                                         KC_F12,         KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_TRANSPARENT,
+//  KC_ESCAPE,      KC_1,           KC_2,           KC_3,           KC_4,           KC_5,       KC_F11,                                         KC_F12,         KC_6,           KC_7,           KC_8,           KC_9,           KC_0,           KC_TRANSPARENT,
+  KC_ESCAPE,      KC_3,           KC_2,           KC_1,           KC_0,           KC_4,       KC_F11,                                         KC_F12,         KC_7,           KC_6,           KC_5,           KC_9,           KC_8,           KC_TRANSPARENT,
   KC_TAB,         KC_Q,           KC_DOT,         KC_O,           KC_U,           KC_J,       KC_CAPSLOCK,                                    KC_BSPACE,      KC_W,           KC_D,           KC_N,           KC_M,           KC_COMMA,       KC_TRANSPARENT,
   KC_MINUS,       KC_H,           KC_A,           KC_E,           KC_I,           KC_K,                                                                       KC_G,           KC_S,           KC_R,           KC_T,           KC_P,           KC_SCOLON,
   MO(_SHIFT),     KC_Z,           KC_QUOTE,       KC_SLASH,       KC_Y,           KC_X,       KC_DELETE,                                      KC_ENTER,       KC_B,           KC_C,           KC_L,           KC_F,           KC_V,           MO(_SHIFT),
