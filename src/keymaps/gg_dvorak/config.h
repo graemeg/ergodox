@@ -3,26 +3,31 @@
 
 #include QMK_KEYBOARD_CONFIG_H
 
-#define PREVENT_STUCK_MODIFIERS
-
 #undef TAPPING_TERM
 #define TAPPING_TERM 230
-#define PERMISSIVE_HOLD			/* https://github.com/qmk/qmk_firmware/pull/1359/  */
-#define IGNORE_MOD_TAP_INTERRUPT	/* https://github.com/qmk/qmk_firmware/issues/142  */
+
 #undef  TAPPING_TOGGLE
 #define TAPPING_TOGGLE 2
 
+#define PERMISSIVE_HOLD			/* https://github.com/qmk/qmk_firmware/pull/1359/  */
+#define IGNORE_MOD_TAP_INTERRUPT	/* https://github.com/qmk/qmk_firmware/issues/142  */
+#define PREVENT_STUCK_MODIFIERS
+
 // #define AUTO_SHIFT_MODIFIERS		/* to Ctrl+A can become Ctrl+Shift+A */
-#define AUTO_SHIFT_TIMEOUT 120
+#define AUTO_SHIFT_TIMEOUT 135
 #define NO_AUTO_SHIFT_NUMERIC
+#define NO_AUTO_SHIFT_SPECIAL
 
 //#define FORCE_NKRO	// Apparently the rules.mk setting doesn't always take effect
 
 #undef DEBOUNCE
-#define DEBOUNCE 10  /* This was the previous default and seems to work better for me. */
+//#define DEBOUNCE 15  /* This was the previous default and seems to work better for me. */
+#define DEBOUNCE 15
 
+#undef PRODUCT
+#define PRODUCT Ergodox (Hacked by Graeme)
 #undef MANUFACTURER
-#define MANUFACTURER    Built by Graeme Geldenhuys
+#define MANUFACTURER Graeme Geldenhuys
 
 //  Restore mouse navigation settings back to QMK defaults instead of Ergodox EZ defaults.
 //  QMK settings are intentionally a bit slower and more manageable
