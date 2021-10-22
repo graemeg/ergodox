@@ -1,3 +1,5 @@
+/* jedit settings  :elasticTabstops=true:encoding=UTF-8: */
+
 [SYMB] = LAYOUT_ergodox(
 /* Symbol Layer with NumPad
 

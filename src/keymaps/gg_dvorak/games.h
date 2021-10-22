@@ -1,3 +1,5 @@
+/* jedit settings  :elasticTabstops=true:encoding=UTF-8: */
+
 [GAMES] = LAYOUT_ergodox(
 /*  Games layer
 

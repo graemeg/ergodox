@@ -1,3 +1,5 @@
+/* jedit settings  :elasticTabstops=true:encoding=UTF-8: */
+
 [BEAKL27A] = LAYOUT_ergodox(
 /* BEAKL-27A [https://ieants.cc/beakl/layouts.php#beakl-27-matrix]
 

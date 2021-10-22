@@ -1,3 +1,5 @@
+/* jedit settings  :elasticTabstops=true:encoding=UTF-8: */
+
 [QWER] = LAYOUT_ergodox(
 /* QWERTY layer (also for games)
 

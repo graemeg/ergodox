@@ -1,3 +1,5 @@
+/* jedit settings  :elasticTabstops=true:encoding=UTF-8: */
+
 [MOUSE] = LAYOUT_ergodox(
 /* Mouse Navigation and Media buttons
 

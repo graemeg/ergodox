@@ -1,3 +1,5 @@
+/* jedit settings  :elasticTabstops=true:encoding=UTF-8: */
+
 [MAC] = LAYOUT_ergodox(
 /* MacOS layout - CMD instead of Ctrl
 
