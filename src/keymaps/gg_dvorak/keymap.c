@@ -129,9 +129,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         ╭──────┬──────╮       ╭──────┬──────╮
                                         │ GAME │ QWER │       │ MAC  │      │
                                  ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮      Hyper = Meh+Gui
-                                 │      │      │ BEAKL│       │ PgUp │ Enter│      │        Meh = Control+Alt+Shift
-                                 │ Space│ Ctrl ├──────┤       ├──────┤   /  │~SYMB │        GUI = Super, Win or Cmd key
-                                 │      │      │ PScr │       │ PgDn │ RAlt │      │        App = Menu key
+                                 │ Space│ Enter│ BEAKL│       │ PgUp │      │      │        Meh = Control+Alt+Shift
+                                 │  /   │  /   ├──────┤       ├──────┤ Del  │~SYMB │        GUI = Super, Win or Cmd key
+                                 │ Ctrl │ RAlt │ PScr │       │ PgDn │      │      │        App = Menu key
                                  ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯        OSL = One-Shot Layer
  */
 	// left hand
@@ -143,7 +143,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 		TG(GAMES),	TG(QWER),
 			TG(BEAKL15),
-	KC_SPC,	KC_LCTRL,	KC_PSCR,
+	CTL_T(KC_SPC),	ALGR_T(KC_ENT),	KC_PSCR,
 
 	// right hand
 	KC_F12,	KC_F6,	KC_F7,	KC_F8,	KC_F9,	KC_F10,	KC_BSLASH,
@@ -154,7 +154,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 	TG(MAC),	__x___,
 	KC_PGUP,
-	KC_PGDN,	ALGR_T(KC_ENT),	MO(SYMB)
+	KC_PGDN,	KC_DEL,	MO(SYMB)
 ),
 [BEAKL15] = LAYOUT_ergodox(
 /* BEAKL-15 [http://www.shenafu.com/code/keyboard/beakl/index.php]
@@ -262,9 +262,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         ╭──────┬──────╮       ╭──────┬──────╮
                                         │      │      │       │      │      │
                                  ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮
-                                 │      │      │      │       │      │      │      │
-								 │      │ CMD  ├──────┤       ├──────┤      │      │
-                                 │      │      │      │       │      │      │      │
+                                 │ Space│      │      │       │      │      │      │
+                                 │  /   │      ├──────┤       ├──────┤      │      │
+                                 │ CMD  │      │      │       │      │      │      │
                                  ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯
  */
 	// left hand
@@ -275,7 +275,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	______,	______,	______,	______,	______,
 	______,	______,
 	______,
-	______,	KC_LGUI,	______,
+	LGUI_T(KC_SPC),	______,	______,
 
 	// right hand
 	______,	______,	______,	______,	______,	______,	______,
