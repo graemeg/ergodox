@@ -125,14 +125,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  ├────────┼──────┼──────┼──────┼──────┼──────┤      │           │ Enter├──────┼──────┼──────┼──────┼──────┼────────┤
  │ Shift  │  ;  :│  Q   │  J   │  K   │   X  │      │           │      │   B  │   M  │  W   │  V   │  Z   │  Shift │
  ╰─┬──────┼──────┼──────┼──────┼──────┼──────┴──────╯           ╰──────┴──────┼──────┼──────┼──────┼──────┼──────┬─╯
-   │LCtrl │ Cmd  │ LAlt │~WinMg│~Arrow│                                       │~Mouse│ Cut  │ Copy │ Enter│ RCtrl│
+   │LCtrl │ Cmd  │ LAlt │~WinMg│~Arrow│                                       │ Ctrl │~Mouse│ Alt  │ Cmd  │ RCtrl│
    ╰──────┴──────┴──────┴──────┴──────╯                                       ╰──────┴──────┴──────┴──────┴──────╯
                                         ╭──────┬──────╮       ╭──────┬──────╮
-                                        │ GAME │ QWER │       │ MAC  │      │
+                                        │ GAME │ QWER │       │ MAC  │ B27a │
                                  ╭──────┼──────┼──────┤       ├──────┼──────┼──────╮      Hyper = Meh+Gui
-                                 │ Space│ Enter│ BEAKL│       │ PgUp │      │      │        Meh = Control+Alt+Shift
-                                 │  /   │  /   ├──────┤       ├──────┤ Del  │~SYMB │        GUI = Super, Win or Cmd key
-                                 │ Ctrl │ RAlt │ PScr │       │ PgDn │      │      │        App = Menu key
+                                 │ Space│ BkSp │ BEAKL│       │ PgUp │      │      │        Meh = Control+Alt+Shift
+                                 │  /   │   /  ├──────┤       ├──────┤ Enter│~SYMB │        GUI = Super, Win or Cmd key
+                                 │ Ctrl │ Alt  │ PScr │       │ PgDn │      │      │        App = Menu key
                                  ╰──────┴──────┴──────╯       ╰──────┴──────┴──────╯        OSL = One-Shot Layer
  */
 	// left hand
@@ -144,14 +144,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 		TG(GAMES),	TG(QWER),
 			TG(BEAKL15),
-	CTL_T(KC_SPC),	ALGR_T(KC_ENT),	KC_PSCR,
+	LCTL_T(KC_SPC),	ALT_T(KC_BSPC),	KC_PSCR,
 
 	// right hand
 	KC_F12,	KC_F6,	KC_F7,	KC_F8,	KC_F9,	KC_F10,	KC_BSLASH,
 	KC_BSPC,	KC_F,	KC_G,	KC_C,	KC_R,	KC_L,	KC_SLASH,
 		KC_D,	KC_H,	KC_T,	KC_N,	KC_S,	KC_MINUS,
 	KC_ENT,	KC_B,	KC_M,	KC_W,	KC_V,	KC_Z,	KC_RSFT,
-			MO(MOUSE),	KC_PC_CUT,	KC_PC_COPY,	KC_ENT,	KC_RCTRL,
+			KC_LCTRL,	TG(MOUSE),	KC_RALT,	KC_RGUI,	KC_RCTRL,
 
 	TG(MAC),	__x___,
 	KC_PGUP,
